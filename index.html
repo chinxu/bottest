@@ -489,6 +489,107 @@ svg .tx.w{stroke:none}
 .sc-it.q{background:var(--s-yellow);border-style:dashed}
 .sc-it.q .sc-ic{font-family:var(--display);font-weight:800;font-size:44px;color:var(--blue)}
 @media (max-width:520px){.sc-it{min-width:92px;padding:8px}.sc-ic{width:48px;height:48px;font-size:36px}.sc-ic img{width:44px;height:44px}.sc-v{font-size:17px}}
+/* sơ đồ đoạn thẳng */
+.bm{display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 12px;border-radius:18px;background:var(--s-yellow);border:2px solid var(--line);max-width:100%}
+.bm-ic{display:flex;gap:10px}.bm-ic span{width:52px;height:52px;display:grid;place-items:center;font-size:40px;line-height:1}.bm-ic img{width:48px;height:48px;object-fit:contain}
+.bm-a{fill:#7FB2FF;stroke:#1C2142;stroke-width:2}.bm-b{fill:#FFC23D;stroke:#1C2142;stroke-width:2}
+.bm-d{fill:#B9F0CF;stroke:#1E9E55;stroke-width:2.5;stroke-dasharray:6 4}.bm-g{fill:none;stroke:#E0314B;stroke-width:2.5;stroke-dasharray:6 4}
+.bm-x{fill:#FFD3DA;stroke:#1C2142;stroke-width:2}.bm-cross{stroke:#E0314B;stroke-width:3}
+.bm-br{fill:none;stroke:#7356E0;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.bm-q{fill:#fff;stroke:#7356E0;stroke-width:2.5;stroke-dasharray:5 4}
+svg .tx.bm-t{font:800 15px var(--display);fill:#1C2142;stroke:#fff}
+svg .tx.bm-l{font:800 14px var(--body);fill:var(--ink)}
+svg .tx.bm-qt{font:800 16px var(--display);fill:#7356E0;stroke:#fff}
+/* ===== Học tập tích lũy ===== */
+.top-in{flex-wrap:wrap}
+.pchip{display:flex;align-items:center;gap:8px;border:2.5px solid var(--line);border-radius:999px;padding:3px 12px 3px 4px;background:var(--card);font-weight:800;font-size:16px;max-width:52vw}
+.pchip img{width:34px;height:34px;object-fit:cover;object-position:top;border-radius:50%;background:var(--s-blue)}
+.pchip span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.stat{border:2px solid var(--line);border-radius:999px;padding:3px 10px;background:var(--s-yellow);font-weight:800;font-size:15px;white-space:nowrap}
+.nav{max-width:1080px;margin:0 auto;display:flex;gap:4px;padding-bottom:6px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));overflow-x:auto}
+.nav button{display:flex;align-items:center;gap:6px;border:2px solid transparent;border-radius:12px;background:none;padding:5px 12px;font-weight:800;font-size:15px;color:var(--muted);white-space:nowrap}
+.nav button i{font-style:normal}
+.nav button.on{background:var(--s-green);border-color:var(--line);color:var(--ink)}
+@media (max-width:760px){
+  .nav{position:fixed;left:0;right:0;bottom:0;z-index:40;background:var(--card);border-top:2.5px solid var(--line);justify-content:space-around;padding-top:4px;padding-bottom:calc(4px + env(safe-area-inset-bottom,0px));gap:0;overflow:visible}
+  .nav button{flex-direction:column;gap:0;font-size:11px;padding:4px 2px;flex:1;min-width:0}
+  .nav button i{font-size:22px}
+  body{padding-bottom:76px}
+  .stat{font-size:13px;padding:2px 8px}
+}
+.hero2{position:relative;padding:14px;display:flex;flex-direction:column;gap:10px;overflow:hidden;background:linear-gradient(180deg,#CFE8FF,#EAF6FF 60%,var(--card));margin-top:12px}
+.bubble2{align-self:center;max-width:560px;background:#fff;color:#1C2142;border:2.5px solid #1C2142;border-radius:18px;padding:10px 16px;font-weight:800;font-size:18px;position:relative;text-align:center;z-index:2}
+.bubble2::after{content:"";position:absolute;left:50%;bottom:-11px;width:18px;height:18px;background:#fff;border-right:2.5px solid #1C2142;border-bottom:2.5px solid #1C2142;transform:translateX(-50%) rotate(45deg)}
+.sky{position:relative;height:190px;border-radius:18px;overflow:hidden}
+.sky.small{height:130px;width:220px;flex:none;border:2px solid var(--line);background:linear-gradient(#CFE8FF,#EAF6FF)}
+.sun{position:absolute;right:18px;top:12px;width:56px;height:56px;border-radius:50%;background:#FFD54A;box-shadow:0 0 0 10px rgba(255,213,74,.25)}
+.cloud{position:absolute;height:22px;border-radius:20px;background:#fff;opacity:.95}
+.cloud.c1{width:90px;left:12%;top:26px;animation:drift 18s linear infinite alternate}.cloud.c2{width:60px;left:60%;top:60px;animation:drift 14s linear infinite alternate-reverse}
+@keyframes drift{to{transform:translateX(40px)}}
+.hill{position:absolute;left:-10%;right:-10%;bottom:-60px;height:110px;border-radius:50%;background:#9ED97A}
+.nest{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);width:170px;height:46px;border-radius:0 0 90px 90px;background:repeating-linear-gradient(160deg,#8B5A2B 0 6px,#A9743F 6px 12px);border:3px solid #5C3A1A;z-index:2;display:flex;justify-content:center}
+.sky.small .nest{width:120px;height:34px;bottom:14px}
+.pet{position:absolute;bottom:22px;font-size:96px;line-height:1;animation:bob 2.4s ease-in-out infinite;filter:drop-shadow(2px 4px 0 rgba(0,0,0,.15))}
+.sky.small .pet{font-size:64px;bottom:16px}
+.pet .crown{position:absolute;top:-34px;left:50%;transform:translateX(-50%);font-size:44px;font-style:normal}
+@keyframes bob{50%{transform:translateY(-8px) rotate(-3deg)}}
+.petinfo{display:flex;gap:10px;justify-content:center;align-items:center;flex-wrap:wrap}
+.pname{font-family:var(--display);font-weight:800;font-size:24px;background:var(--card);border:2.5px solid var(--line);border-radius:999px;padding:2px 16px}
+.mini{border:0;background:none;padding:0 0 0 4px;font-size:16px}
+.pstage{font-weight:800;color:var(--green);background:var(--s-green);border-radius:999px;padding:3px 12px}
+.feed{display:flex;flex-direction:column;gap:4px;align-items:center;background:var(--card);border:2px solid var(--line);border-radius:16px;padding:8px 14px;max-width:560px;width:100%;align-self:center}
+.feed .tbar{width:100%}.feed .tbar i{background:var(--yellow)}
+.feed span{font-weight:800}.feed small{color:var(--muted)}
+.today{margin-top:16px}
+.goal{display:flex;align-items:center;gap:8px;font-weight:800;color:var(--muted)}
+.ring{--p:0;width:52px;height:52px;border-radius:50%;display:grid;place-items:center;font-weight:800;color:var(--ink);background:radial-gradient(var(--card) 58%,transparent 59%),conic-gradient(var(--green) calc(var(--p)*360deg),var(--grid2) 0)}
+.act{display:flex;align-items:center;gap:14px;text-align:left;border:2.5px solid var(--line);border-radius:18px;padding:14px 18px;color:#fff;box-shadow:0 5px 0 var(--shadow);transition:transform .08s}
+.act:active{transform:translateY(3px);box-shadow:0 2px 0 var(--shadow)}
+.act i{font-style:normal;font-size:30px;width:52px;height:52px;border-radius:14px;background:rgba(255,255,255,.2);display:grid;place-items:center;flex:none}
+.act b{display:block;font-family:var(--display);font-size:24px;line-height:1.1}.act small{font-size:15px;opacity:.95}
+.act.blue{background:#2F6FB5}.act.green{background:#3E7E2E}.act.orange{background:#E07B1F}.act.violet{background:#6B4FD0}.act.red{background:#C8344A}
+.rwbox{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.rw{border:2px solid var(--line);border-radius:999px;padding:2px 10px;background:var(--s-yellow);font-weight:800;font-size:14px}
+.pp{text-align:center;display:flex;flex-direction:column;gap:6px;align-items:center}.pp p{margin:0}
+.pp-big{font-size:84px;line-height:1;animation:pop .5s}
+.plist{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px}
+.pitem{display:flex;flex-direction:column;align-items:center;gap:2px;border:2.5px solid var(--line);border-radius:16px;padding:8px;background:var(--card)}
+.pitem img{height:70px}.pitem.on{background:var(--s-green)}
+/* lộ trình */
+.path{display:flex;flex-direction:column;gap:18px}
+.unit{display:flex;flex-direction:column;gap:6px}
+.uhead{position:sticky;top:calc(env(safe-area-inset-top,0px) + 96px);z-index:5;display:flex;align-items:center;gap:12px;background:var(--green);color:#fff;border:2.5px solid var(--line);border-radius:16px;padding:8px 14px;box-shadow:0 4px 0 var(--shadow)}
+.uhead small{display:block;opacity:.9;font-weight:700}.uhead b{font-family:var(--display);font-size:20px;line-height:1.1}
+.uico{width:44px;height:44px;border-radius:12px;background:#fff;display:grid;place-items:center;font-size:28px;flex:none}.uico img{width:34px;height:34px}
+.ucount{margin-left:auto;font-weight:800;background:rgba(0,0,0,.2);border-radius:999px;padding:2px 10px}
+.nodes{display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 0}
+.nd{display:flex;flex-direction:column;align-items:center;transform:translateX(calc(var(--o)*46px));max-width:240px;text-align:center}
+.node{position:relative;width:76px;height:70px;border-radius:50%;border:3px solid var(--line);background:#D9DCE8;box-shadow:0 7px 0 #9AA0B8;font-family:var(--display);font-weight:800;font-size:26px;color:#4A4F6B}
+.node:active{transform:translateY(4px);box-shadow:0 3px 0 #9AA0B8}
+.node.s1{background:#FFD866;box-shadow:0 7px 0 #C99A16;color:#5A3D00}.node.s2{background:#FFB938;box-shadow:0 7px 0 #B5760B;color:#4A2C00}.node.s3{background:#58CC02;box-shadow:0 7px 0 #3A8A00;color:#fff}
+.node.cur{background:#4F8DFF;box-shadow:0 7px 0 #2552B5;color:#fff;animation:nudge 1.6s ease-in-out infinite}
+.node .go{position:absolute;top:-34px;left:50%;transform:translateX(-50%);background:var(--card);color:var(--blue);border:2px solid var(--line);border-radius:10px;padding:1px 8px;font-size:13px;white-space:nowrap}
+.nst{color:#F2A900;letter-spacing:2px;font-size:15px;margin-top:8px}
+.nnm{font-size:13px;color:var(--muted);font-weight:700;line-height:1.2}
+/* huy hiệu */
+.badges{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-top:14px}
+.bdg{display:flex;flex-direction:column;align-items:center;text-align:center;gap:2px;border:2.5px solid var(--line);border-radius:18px;padding:12px;background:var(--card);opacity:.45;filter:grayscale(1)}
+.bdg.on{opacity:1;filter:none;background:var(--s-yellow);box-shadow:3px 3px 0 var(--shadow)}
+.bdg .bi{font-size:48px;line-height:1.1}.bdg small{color:var(--muted)}
+/* phụ huynh */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:14px}
+.kpi{padding:14px;display:flex;flex-direction:column;gap:2px}.kpi b{font-family:var(--display);font-size:32px;font-variant-numeric:tabular-nums}.kpi small{font-weight:800;color:var(--muted)}
+.week{display:flex;gap:10px;align-items:flex-end;height:150px}
+.week div{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:2px;height:100%}
+.wb{width:70%;max-width:44px;background:var(--green);border:2px solid var(--line);border-radius:8px 8px 2px 2px}
+.mrow{display:flex;gap:10px;align-items:flex-start;flex-wrap:wrap}.mrow>span{min-width:130px;font-size:15px}
+.mcells{display:flex;flex-wrap:wrap;gap:4px}
+.mc{width:34px;height:30px;border-radius:8px;border:2px solid var(--line);display:grid;place-items:center;font-size:12px;font-weight:800;background:var(--card);font-variant-numeric:tabular-nums}
+.mc.m0{background:#FFB3BF}.mc.m1{background:#C9F0D6}.mc.m2{background:#7FD99E}.mc.m3{background:#2DB45D;color:#fff}
+.nodes{gap:20px}
+.nd{max-width:200px}
+.node.cur{margin-top:26px}
+@media (max-width:760px){.uhead{top:calc(env(safe-area-inset-top,0px) + 60px)}.nd{transform:translateX(calc(var(--o)*26px));max-width:170px}}
 </style>
 </head><body>
 <header class="top" id="top"></header><main class="wrap" id="main"></main>
@@ -657,9 +758,9 @@ def('honkem',()=>{const [a0,b]=noBorrowPair(),a=a0;return pick([
   ()=>F(`Số ${b} bé hơn số ${a} là {_} đơn vị`,a-b),
 ])()});
 def('wHonKem',()=>{const [a,b]=noBorrowPair();const [N,M]=two2();const o=pick(OBJ);return pick([
-  ()=>F(`${N} có ${a} ${o[0]}, ${M} có ${b} ${o[0]}. Hỏi ${N} có nhiều hơn ${M} bao nhiêu ${o[0]}?`,a-b,{u:o[1],long:true,sc:[SI(oe(o),N,`${a} ${o[1]}`),SI(oe(o),M,`${b} ${o[1]}`),SI('❔','Hơn','?')]}),
-  ()=>F(`${N} có ${a} ${o[0]}, ${M} có ${b} ${o[0]}. Hỏi ${M} có ít hơn ${N} bao nhiêu ${o[0]}?`,a-b,{u:o[1],long:true,sc:[SI(oe(o),N,`${a} ${o[1]}`),SI(oe(o),M,`${b} ${o[1]}`),SI('❔','Ít hơn','?')]}),
-  ()=>{const t=R(6,9),bo=R(28,40);return F(`${N} ${t} tuổi, bố của ${N} ${bo} tuổi. Hỏi bố hơn ${N} bao nhiêu tuổi?`,bo-t,{u:'tuổi',long:true,sc:[SI(boyg(N),N,`${t} tuổi`),SI('👨','Bố',`${bo} tuổi`),SI('❔','Bố hơn','? tuổi')]})},
+  ()=>F(`${N} có ${a} ${o[0]}, ${M} có ${b} ${o[0]}. Hỏi ${N} có nhiều hơn ${M} bao nhiêu ${o[0]}?`,a-b,{u:o[1],long:true,bm:{t:'cmp',a,b,n1:N,n2:M,e:oe(o),u:o[1]},sc:[SI(oe(o),N,`${a} ${o[1]}`),SI(oe(o),M,`${b} ${o[1]}`),SI('❔','Hơn','?')]}),
+  ()=>F(`${N} có ${a} ${o[0]}, ${M} có ${b} ${o[0]}. Hỏi ${M} có ít hơn ${N} bao nhiêu ${o[0]}?`,a-b,{u:o[1],long:true,bm:{t:'cmp',a,b,n1:N,n2:M,e:oe(o),u:o[1]},sc:[SI(oe(o),N,`${a} ${o[1]}`),SI(oe(o),M,`${b} ${o[1]}`),SI('❔','Ít hơn','?')]}),
+  ()=>{const t=R(6,9),bo=R(28,40);return F(`${N} ${t} tuổi, bố của ${N} ${bo} tuổi. Hỏi bố hơn ${N} bao nhiêu tuổi?`,bo-t,{u:'tuổi',long:true,bm:{t:'cmp',a:bo,b:t,n1:'Bố',n2:N,e:'👨',e2:boyg(N),u:'tuổi'},sc:[SI(boyg(N),N,`${t} tuổi`),SI('👨','Bố',`${bo} tuổi`),SI('❔','Bố hơn','? tuổi')]})},
 ])()});
 /* --- Cộng trừ không nhớ ≤100 --- */
 def('add100nc',()=>{if(Math.random()<.25){const a=R(1,8)*10,b=R(1,9-a/10)*10;return F(`${a} + ${b} = {_}`,a+b,{ord:true})}
@@ -669,10 +770,10 @@ def('sub100nc',()=>{if(Math.random()<.25){const a=R(2,10)*10,b=R(1,a/10-1)*10;re
 function cmpExprGen(mk){return()=>{const [e1,v1]=mk();let e2,w2;if(Math.random()<.4){w2=Math.max(0,v1+pick([-1,0,1,-10,10,2,-2]));e2=String(w2)}else{[e2,w2]=mk()}return F(`${e1} {_} ${e2}`,sign(v1,w2),{opts:['>','<','=']})}}
 def('cmpExpr100nc',cmpExprGen(()=>{if(Math.random()<.5){const [a,b]=noCarryPair();return [`${a} + ${b}`,a+b]}const [a,b]=noBorrowPair();return [`${a} ${MI} ${b}`,a-b]}));
 function wAddSub(pairAdd,pairSub){return()=>{const [N,M]=two2();const o=pick(OBJ);return pick([
-  ()=>{const [a,b]=pairAdd();return F(`${N} có ${a} ${o[0]}, ${M} cho ${N} thêm ${b} ${o[0]}. Hỏi ${N} có tất cả bao nhiêu ${o[0]}?`,a+b,{u:o[1],long:true,sc:[SI(oe(o),N+' có',`${a} ${o[1]}`),SI(oe(o),M+' cho thêm',`${b} ${o[1]}`),SI('❔','Tất cả','?')]})},
-  ()=>{const [a,b]=pairAdd();return F(`Lớp 2A trồng được ${a} cây, lớp 2B trồng được ${b} cây. Hỏi cả hai lớp trồng được bao nhiêu cây?`,a+b,{u:'cây',long:true,sc:[SI('🌳','Lớp 2A',`${a} cây`),SI('🌳','Lớp 2B',`${b} cây`),SI('❔','Cả hai lớp','? cây')]})},
-  ()=>{const [a,b]=pairSub();return F(`${N} có ${a} ${o[0]}, ${N} cho ${M} ${b} ${o[0]}. Hỏi ${N} còn lại bao nhiêu ${o[0]}?`,a-b,{u:o[1],long:true,sc:[SI(oe(o),N+' có',`${a} ${o[1]}`),SI(oe(o),'Cho '+M,`${b} ${o[1]}`),SI('❔','Còn lại','?')]})},
-  ()=>{const [a,b]=pairSub();return F(`Một cửa hàng có ${a} ${o[0]}, đã bán ${b} ${o[0]}. Hỏi cửa hàng còn lại bao nhiêu ${o[0]}?`,a-b,{u:o[1],long:true,sc:[SI('🏪','Cửa hàng có',`${a} ${o[1]}`),SI(oe(o),'Đã bán',`${b} ${o[1]}`),SI('❔','Còn lại','?')]})},
+  ()=>{const [a,b]=pairAdd();return F(`${N} có ${a} ${o[0]}, ${M} cho ${N} thêm ${b} ${o[0]}. Hỏi ${N} có tất cả bao nhiêu ${o[0]}?`,a+b,{u:o[1],long:true,bm:{t:'sum',a,b,l:N,e:oe(o),u:o[1]},sc:[SI(oe(o),N+' có',`${a} ${o[1]}`),SI(oe(o),M+' cho thêm',`${b} ${o[1]}`),SI('❔','Tất cả','?')]})},
+  ()=>{const [a,b]=pairAdd();return F(`Lớp 2A trồng được ${a} cây, lớp 2B trồng được ${b} cây. Hỏi cả hai lớp trồng được bao nhiêu cây?`,a+b,{u:'cây',long:true,bm:{t:'sum',a,b,l:'2A + 2B',e:'🌳',u:'cây'},sc:[SI('🌳','Lớp 2A',`${a} cây`),SI('🌳','Lớp 2B',`${b} cây`),SI('❔','Cả hai lớp','? cây')]})},
+  ()=>{const [a,b]=pairSub();return F(`${N} có ${a} ${o[0]}, ${N} cho ${M} ${b} ${o[0]}. Hỏi ${N} còn lại bao nhiêu ${o[0]}?`,a-b,{u:o[1],long:true,bm:{t:'diff',c:a,b,l:N,e:oe(o),u:o[1]},sc:[SI(oe(o),N+' có',`${a} ${o[1]}`),SI(oe(o),'Cho '+M,`${b} ${o[1]}`),SI('❔','Còn lại','?')]})},
+  ()=>{const [a,b]=pairSub();return F(`Một cửa hàng có ${a} ${o[0]}, đã bán ${b} ${o[0]}. Hỏi cửa hàng còn lại bao nhiêu ${o[0]}?`,a-b,{u:o[1],long:true,bm:{t:'diff',c:a,b,l:'Cửa hàng',e:oe(o),u:o[1]},sc:[SI('🏪','Cửa hàng có',`${a} ${o[1]}`),SI(oe(o),'Đã bán',`${b} ${o[1]}`),SI('❔','Còn lại','?')]})},
 ])()}}
 def('wAddSub100nc',wAddSub(noCarryPair,noBorrowPair));
 
@@ -705,10 +806,10 @@ def('wThem20',()=>{const [a,b]=pAdd20();const [N]=two2();const o=pick(OBJ);retur
 ])()});
 def('wSub20',()=>{const [a,b]=pSub20();const o=pick(OBJ);return F(`Có ${a} ${o[0]}, đã dùng hết ${b} ${o[0]}. Hỏi còn lại bao nhiêu ${o[0]}?`,a-b,{u:o[1],long:true,cnt:[{lab:'Có',n:a,e:oe(o),x:b}]})});
 function wNhieuIt(pA,pS){return()=>{const [N,M]=two2();const o=pick(OBJ);return pick([
-  ()=>{const [a,b]=pA();return F(`${N} có ${a} ${o[0]}, ${M} có nhiều hơn ${N} ${b} ${o[0]}. Hỏi ${M} có bao nhiêu ${o[0]}?`,a+b,{u:o[1],long:true,sc:[SI(oe(o),N,`${a} ${o[1]}`),SI(oe(o),M,`nhiều hơn ${b}`),SI('❔',M+' có','?')],cnt:[{lab:N,n:a,e:oe(o)},{lab:M,n:a,e:oe(o),plus:b}]})},
-  ()=>{const [a,b]=pA();return F(`Lớp 2A có ${a} bạn nữ, số bạn nam nhiều hơn số bạn nữ là ${b} bạn. Hỏi lớp 2A có bao nhiêu bạn nam?`,a+b,{u:'bạn',long:true,sc:[SI('👧','Bạn nữ',`${a} bạn`),SI('👦','Bạn nam',`nhiều hơn ${b}`),SI('❔','Bạn nam','? bạn')],cnt:[{lab:'Bạn nữ',n:a,e:'👧'},{lab:'Bạn nam',n:a,e:'👦',plus:b}]})},
-  ()=>{const [a,b]=pS();return F(`${N} có ${a} ${o[0]}, ${M} có ít hơn ${N} ${b} ${o[0]}. Hỏi ${M} có bao nhiêu ${o[0]}?`,a-b,{u:o[1],long:true,sc:[SI(oe(o),N,`${a} ${o[1]}`),SI(oe(o),M,`ít hơn ${b}`),SI('❔',M+' có','?')],cnt:[{lab:N,n:a,e:oe(o)},{lab:M,n:a,e:oe(o),x:b}]})},
-  ()=>{const [a,b]=pS();return F(`Đàn gà có ${a} con, đàn vịt ít hơn đàn gà ${b} con. Hỏi đàn vịt có bao nhiêu con?`,a-b,{u:'con',long:true,sc:[SI('🐔','Đàn gà',`${a} con`),SI('🦆','Đàn vịt',`ít hơn ${b} con`),SI('❔','Đàn vịt','? con')],cnt:[{lab:'Đàn gà',n:a,e:'🐔'},{lab:'Đàn vịt',n:a,e:'🦆',x:b}]})},
+  ()=>{const [a,b]=pA();return F(`${N} có ${a} ${o[0]}, ${M} có nhiều hơn ${N} ${b} ${o[0]}. Hỏi ${M} có bao nhiêu ${o[0]}?`,a+b,{u:o[1],long:true,bm:{t:'more',a,b,n1:N,n2:M,e:oe(o),u:o[1]},sc:[SI(oe(o),N,`${a} ${o[1]}`),SI(oe(o),M,`nhiều hơn ${b}`),SI('❔',M+' có','?')],cnt:[{lab:N,n:a,e:oe(o)},{lab:M,n:a,e:oe(o),plus:b}]})},
+  ()=>{const [a,b]=pA();return F(`Lớp 2A có ${a} bạn nữ, số bạn nam nhiều hơn số bạn nữ là ${b} bạn. Hỏi lớp 2A có bao nhiêu bạn nam?`,a+b,{u:'bạn',long:true,bm:{t:'more',a,b,n1:'Bạn nữ',n2:'Bạn nam',e:'👧',e2:'👦',u:'bạn'},sc:[SI('👧','Bạn nữ',`${a} bạn`),SI('👦','Bạn nam',`nhiều hơn ${b}`),SI('❔','Bạn nam','? bạn')],cnt:[{lab:'Bạn nữ',n:a,e:'👧'},{lab:'Bạn nam',n:a,e:'👦',plus:b}]})},
+  ()=>{const [a,b]=pS();return F(`${N} có ${a} ${o[0]}, ${M} có ít hơn ${N} ${b} ${o[0]}. Hỏi ${M} có bao nhiêu ${o[0]}?`,a-b,{u:o[1],long:true,bm:{t:'less',a,b,n1:N,n2:M,e:oe(o),u:o[1]},sc:[SI(oe(o),N,`${a} ${o[1]}`),SI(oe(o),M,`ít hơn ${b}`),SI('❔',M+' có','?')],cnt:[{lab:N,n:a,e:oe(o)},{lab:M,n:a,e:oe(o),x:b}]})},
+  ()=>{const [a,b]=pS();return F(`Đàn gà có ${a} con, đàn vịt ít hơn đàn gà ${b} con. Hỏi đàn vịt có bao nhiêu con?`,a-b,{u:'con',long:true,bm:{t:'less',a,b,n1:'Đàn gà',n2:'Đàn vịt',e:'🐔',e2:'🦆',u:'con'},sc:[SI('🐔','Đàn gà',`${a} con`),SI('🦆','Đàn vịt',`ít hơn ${b} con`),SI('❔','Đàn vịt','? con')],cnt:[{lab:'Đàn gà',n:a,e:'🐔'},{lab:'Đàn vịt',n:a,e:'🦆',x:b}]})},
 ])()}}
 def('wNhieu20',wNhieuIt(pAdd20,pSub20));
 
@@ -726,14 +827,14 @@ def('kg',()=>{if(Math.random()<.3){const ws=shuffle([1,2,5]).slice(0,R(1,3)).sor
   return unitGen('kg')()});
 def('lit',()=>{if(Math.random()<.25){const n=R(2,9);return F(`Rót đầy nước vào ${n} ca 1 l thì vừa hết nước trong bình. Bình chứa {_}`,n,{u:'l',long:true,cnt:[{lab:'Ca 1 l',n:n,e:'🥛'}]})}return unitGen('l')()});
 def('wKg',()=>{const a=R(10,45),b=R(5,40);return pick([
-  ()=>F(`Bao gạo nặng ${a} kg, bao ngô nặng ${b} kg. Hỏi cả hai bao nặng bao nhiêu ki-lô-gam?`,a+b,{u:'kg',long:true,sc:[SI('🍚','Bao gạo',`${a} kg`),SI('🌽','Bao ngô',`${b} kg`),SI('⚖️','Cả hai bao','? kg')]}),
-  ()=>{const c=a+b;return F(`Con lợn cân nặng ${c} kg. Con chó nhẹ hơn con lợn ${b} kg. Hỏi con chó cân nặng bao nhiêu ki-lô-gam?`,a,{u:'kg',long:true,sc:[SI('🐷','Con lợn',`${c} kg`),SI('🐶','Con chó',`nhẹ hơn ${b} kg`),SI('⚖️','Con chó','? kg')]})},
-  ()=>F(`Mẹ mua ${a} kg cam, sau đó mua thêm ${b} kg quýt. Hỏi mẹ đã mua tất cả bao nhiêu ki-lô-gam hoa quả?`,a+b,{u:'kg',long:true,sc:[SI('🍊','Cam',`${a} kg`),SI('🍊','Quýt',`${b} kg`),SI('⚖️','Tất cả','? kg')]}),
+  ()=>F(`Bao gạo nặng ${a} kg, bao ngô nặng ${b} kg. Hỏi cả hai bao nặng bao nhiêu ki-lô-gam?`,a+b,{u:'kg',long:true,bm:{t:'sum',a,b,l:'Gạo + ngô',e:'🍚',u:'kg'},sc:[SI('🍚','Bao gạo',`${a} kg`),SI('🌽','Bao ngô',`${b} kg`),SI('⚖️','Cả hai bao','? kg')]}),
+  ()=>{const c=a+b;return F(`Con lợn cân nặng ${c} kg. Con chó nhẹ hơn con lợn ${b} kg. Hỏi con chó cân nặng bao nhiêu ki-lô-gam?`,a,{u:'kg',long:true,bm:{t:'less',a:c,b,n1:'Con lợn',n2:'Con chó',e:'🐷',e2:'🐶',u:'kg'},sc:[SI('🐷','Con lợn',`${c} kg`),SI('🐶','Con chó',`nhẹ hơn ${b} kg`),SI('⚖️','Con chó','? kg')]})},
+  ()=>F(`Mẹ mua ${a} kg cam, sau đó mua thêm ${b} kg quýt. Hỏi mẹ đã mua tất cả bao nhiêu ki-lô-gam hoa quả?`,a+b,{u:'kg',long:true,bm:{t:'sum',a,b,l:'Cam + quýt',e:'🍊',u:'kg'},sc:[SI('🍊','Cam',`${a} kg`),SI('🍊','Quýt',`${b} kg`),SI('⚖️','Tất cả','? kg')]}),
 ])()});
 def('wLit',()=>{const a=R(5,40),b=R(2,30);return pick([
-  ()=>F(`Can to đựng ${a} l nước, can bé đựng ${b} l nước. Hỏi cả hai can đựng bao nhiêu lít nước?`,a+b,{u:'l',long:true,sc:[SI('🛢️','Can to',`${a} l`),SI('🛢️','Can bé',`${b} l`),SI('🥛','Cả hai can','? l')]}),
-  ()=>{const c=a+b;return F(`Thùng có ${c} l nước, đã dùng ${b} l. Hỏi trong thùng còn lại bao nhiêu lít nước?`,a,{u:'l',long:true,sc:[SI('🪣','Thùng có',`${c} l`),SI('💧','Đã dùng',`${b} l`),SI('❔','Còn lại','? l')]})},
-  ()=>F(`Buổi sáng cửa hàng bán được ${a} l dầu, buổi chiều bán được ${b} l dầu. Hỏi cả ngày bán được bao nhiêu lít dầu?`,a+b,{u:'l',long:true,sc:[SI('🌅','Buổi sáng',`${a} l`),SI('🌇','Buổi chiều',`${b} l`),SI('🛢️','Cả ngày','? l')]}),
+  ()=>F(`Can to đựng ${a} l nước, can bé đựng ${b} l nước. Hỏi cả hai can đựng bao nhiêu lít nước?`,a+b,{u:'l',long:true,bm:{t:'sum',a,b,l:'Hai can',e:'🛢️',u:'l'},sc:[SI('🛢️','Can to',`${a} l`),SI('🛢️','Can bé',`${b} l`),SI('🥛','Cả hai can','? l')]}),
+  ()=>{const c=a+b;return F(`Thùng có ${c} l nước, đã dùng ${b} l. Hỏi trong thùng còn lại bao nhiêu lít nước?`,a,{u:'l',long:true,bm:{t:'diff',c,b,l:'Thùng',e:'🪣',u:'l'},sc:[SI('🪣','Thùng có',`${c} l`),SI('💧','Đã dùng',`${b} l`),SI('❔','Còn lại','? l')]})},
+  ()=>F(`Buổi sáng cửa hàng bán được ${a} l dầu, buổi chiều bán được ${b} l dầu. Hỏi cả ngày bán được bao nhiêu lít dầu?`,a+b,{u:'l',long:true,bm:{t:'sum',a,b,l:'Sáng + chiều',e:'🛢️',u:'l'},sc:[SI('🌅','Buổi sáng',`${a} l`),SI('🌇','Buổi chiều',`${b} l`),SI('🛢️','Cả ngày','? l')]}),
 ])()});
 
 /* --- Cộng trừ có nhớ ≤100 --- */
@@ -862,14 +963,14 @@ function mulTable(k){return()=>{const b=R(1,10);return pick([
 ])()}}
 def('mul2',mulTable(2));def('mul5',mulTable(5));
 def('wMul2',()=>{const b=R(2,10);return pick([
-  ()=>F(`Mỗi con gà có 2 chân. Hỏi ${b} con gà có bao nhiêu chân?`,2*b,{u:'chân',long:true,cnt:[{lab:'',n:b,e:'🐔'}]}),
-  ()=>F(`Mỗi đôi đũa có 2 chiếc. Hỏi ${b} đôi đũa có bao nhiêu chiếc đũa?`,2*b,{u:'chiếc',long:true,cnt:[{lab:'',n:b,e:'🥢'}]}),
-  ()=>F(`Mỗi bạn được thưởng 2 quyển vở. Hỏi ${b} bạn được thưởng bao nhiêu quyển vở?`,2*b,{u:'quyển',long:true,cnt:[{lab:'',n:b,e:'🧒'}]}),
+  ()=>F(`Mỗi con gà có 2 chân. Hỏi ${b} con gà có bao nhiêu chân?`,2*b,{u:'chân',long:true,bm:{t:'mul',k:b,each:2,l:b+' con gà',e:'🐔',u:'chân'},cnt:[{lab:'',n:b,e:'🐔'}]}),
+  ()=>F(`Mỗi đôi đũa có 2 chiếc. Hỏi ${b} đôi đũa có bao nhiêu chiếc đũa?`,2*b,{u:'chiếc',long:true,bm:{t:'mul',k:b,each:2,l:b+' đôi',e:'🥢',u:'chiếc'},cnt:[{lab:'',n:b,e:'🥢'}]}),
+  ()=>F(`Mỗi bạn được thưởng 2 quyển vở. Hỏi ${b} bạn được thưởng bao nhiêu quyển vở?`,2*b,{u:'quyển',long:true,bm:{t:'mul',k:b,each:2,l:b+' bạn',e:'📒',u:'quyển'},cnt:[{lab:'',n:b,e:'🧒'}]}),
 ])()});
 def('wMul5',()=>{const b=R(2,10);return pick([
-  ()=>F(`Mỗi bàn tay có 5 ngón tay. Hỏi ${b} bàn tay có bao nhiêu ngón tay?`,5*b,{u:'ngón',long:true,cnt:[{lab:'',n:b,e:'🖐️'}]}),
-  ()=>F(`Mỗi túi có 5 kg gạo. Hỏi ${b} túi như thế có bao nhiêu ki-lô-gam gạo?`,5*b,{u:'kg',long:true,sc:[SI('🛍️','Mỗi túi','5 kg'),SI('🛍️','Số túi',`${b} túi`),SI('⚖️','Tất cả','? kg')],cnt:[{lab:'',n:b,e:'🛍️'}]}),
-  ()=>F(`Mỗi bông hoa có 5 cánh. Hỏi ${b} bông hoa có bao nhiêu cánh?`,5*b,{u:'cánh',long:true,cnt:[{lab:'',n:b,e:'🌸'}]}),
+  ()=>F(`Mỗi bàn tay có 5 ngón tay. Hỏi ${b} bàn tay có bao nhiêu ngón tay?`,5*b,{u:'ngón',long:true,bm:{t:'mul',k:b,each:5,l:b+' bàn tay',e:'🖐️',u:'ngón'},cnt:[{lab:'',n:b,e:'🖐️'}]}),
+  ()=>F(`Mỗi túi có 5 kg gạo. Hỏi ${b} túi như thế có bao nhiêu ki-lô-gam gạo?`,5*b,{u:'kg',long:true,bm:{t:'mul',k:b,each:5,l:b+' túi',e:'🛍️',u:'kg'},sc:[SI('🛍️','Mỗi túi','5 kg'),SI('🛍️','Số túi',`${b} túi`),SI('⚖️','Tất cả','? kg')],cnt:[{lab:'',n:b,e:'🛍️'}]}),
+  ()=>F(`Mỗi bông hoa có 5 cánh. Hỏi ${b} bông hoa có bao nhiêu cánh?`,5*b,{u:'cánh',long:true,bm:{t:'mul',k:b,each:5,l:b+' bông',e:'🌸',u:'cánh'},cnt:[{lab:'',n:b,e:'🌸'}]}),
 ])()});
 def('divConcept',()=>{const a=R(2,5),b=R(2,5),c=a*b;const e=pick(EM);return pick([
   ()=>F(`Có ${c} ${e} chia đều vào ${b} đĩa. Mỗi đĩa có {_} ${e}`,a),
@@ -892,14 +993,14 @@ function divTable(k){return()=>{const b=R(1,10),c=k*b;return pick([
 ])()}}
 def('div2',divTable(2));def('div5',divTable(5));
 def('wDiv2',()=>{const b=R(2,10),c=2*b;return pick([
-  ()=>F(`Có ${c} cái kẹo chia đều cho 2 bạn. Hỏi mỗi bạn được mấy cái kẹo?`,b,{u:'cái',long:true,cnt:[{lab:'',n:c,e:'🍬'}]}),
-  ()=>F(`Có ${c} chiếc đũa, mỗi đôi có 2 chiếc. Hỏi có bao nhiêu đôi đũa?`,b,{u:'đôi',long:true,cnt:[{lab:'',n:c,e:'🥢'}]}),
-  ()=>F(`Có ${c} học sinh xếp đều thành 2 hàng. Hỏi mỗi hàng có bao nhiêu học sinh?`,b,{u:'học sinh',long:true,cnt:[{lab:'',n:c,e:'🧒'}]}),
+  ()=>F(`Có ${c} cái kẹo chia đều cho 2 bạn. Hỏi mỗi bạn được mấy cái kẹo?`,b,{u:'cái',long:true,bm:{t:'div',c,k:2,l:'2 bạn',e:'🍬',u:'cái'},cnt:[{lab:'',n:c,e:'🍬'}]}),
+  ()=>F(`Có ${c} chiếc đũa, mỗi đôi có 2 chiếc. Hỏi có bao nhiêu đôi đũa?`,b,{u:'đôi',long:true,bm:{t:'divg',c,each:2,l:'Đũa',e:'🥢',u:'chiếc',unit2:'đôi'},cnt:[{lab:'',n:c,e:'🥢'}]}),
+  ()=>F(`Có ${c} học sinh xếp đều thành 2 hàng. Hỏi mỗi hàng có bao nhiêu học sinh?`,b,{u:'học sinh',long:true,bm:{t:'div',c,k:2,l:'2 hàng',e:'🧒',u:'HS'},cnt:[{lab:'',n:c,e:'🧒'}]}),
 ])()});
 def('wDiv5',()=>{const b=R(2,10),c=5*b;return pick([
-  ()=>F(`Có ${c} bông hoa cắm đều vào 5 lọ. Hỏi mỗi lọ có mấy bông hoa?`,b,{u:'bông',long:true,sc:[SI('🌸','Có',`${c} bông`),SI('🏺','Cắm vào','5 lọ'),SI('❔','Mỗi lọ','? bông')],cnt:[{lab:'',n:c,e:'🌸'}]}),
-  ()=>F(`Có ${c} kg gạo chia đều vào các túi, mỗi túi 5 kg. Hỏi được bao nhiêu túi gạo?`,b,{u:'túi',long:true,sc:[SI('🍚','Có',`${c} kg gạo`),SI('🛍️','Mỗi túi','5 kg'),SI('❔','Số túi','?')]}),
-  ()=>F(`Có ${c} quyển vở chia đều cho 5 bạn. Hỏi mỗi bạn được mấy quyển vở?`,b,{u:'quyển',long:true,sc:[SI('📒','Có',`${c} quyển`),SI('🧒','Chia cho','5 bạn'),SI('❔','Mỗi bạn','? quyển')],cnt:[{lab:'',n:c,e:'📒'}]}),
+  ()=>F(`Có ${c} bông hoa cắm đều vào 5 lọ. Hỏi mỗi lọ có mấy bông hoa?`,b,{u:'bông',long:true,bm:{t:'div',c,k:5,l:'5 lọ',e:'🌸',u:'bông'},sc:[SI('🌸','Có',`${c} bông`),SI('🏺','Cắm vào','5 lọ'),SI('❔','Mỗi lọ','? bông')],cnt:[{lab:'',n:c,e:'🌸'}]}),
+  ()=>F(`Có ${c} kg gạo chia đều vào các túi, mỗi túi 5 kg. Hỏi được bao nhiêu túi gạo?`,b,{u:'túi',long:true,bm:{t:'divg',c,each:5,l:'Gạo',e:'🍚',u:'kg',unit2:'túi'},sc:[SI('🍚','Có',`${c} kg gạo`),SI('🛍️','Mỗi túi','5 kg'),SI('❔','Số túi','?')]}),
+  ()=>F(`Có ${c} quyển vở chia đều cho 5 bạn. Hỏi mỗi bạn được mấy quyển vở?`,b,{u:'quyển',long:true,bm:{t:'div',c,k:5,l:'5 bạn',e:'📒',u:'quyển'},sc:[SI('📒','Có',`${c} quyển`),SI('🧒','Chia cho','5 bạn'),SI('❔','Mỗi bạn','? quyển')],cnt:[{lab:'',n:c,e:'📒'}]}),
 ])()});
 
 /* --- Hình khối --- */
@@ -967,9 +1068,9 @@ def('len',()=>pick([
 def('lenUnit',()=>{const p=pick([['Cái bút chì dài khoảng 15',"cm"],['Gang tay của em dài khoảng 1','dm'],['Cái bàn học dài khoảng 1','m'],['Quãng đường từ nhà em đến trường dài khoảng 2','km'],['Cục tẩy dài khoảng 3','cm'],['Cột cờ cao khoảng 10','m'],['Quyển sách Toán 2 dài khoảng 3','dm'],['Quãng đường Hà Nội – Hải Phòng dài khoảng 100','km'],['Chiếc giường dài khoảng 2','m'],['Con kiến dài khoảng 1','cm']]);
   return F(`${p[0]} {_}`,p[1],{opts:['cm','dm','m','km']})});
 def('wLen',()=>{const a=R(10,60),b=R(5,40);return pick([
-  ()=>F(`Đoạn dây thứ nhất dài ${a} dm, đoạn dây thứ hai dài ${b} dm. Hỏi cả hai đoạn dây dài bao nhiêu đề-xi-mét?`,a+b,{u:'dm',long:true,sc:[SI('🧵','Đoạn thứ nhất',`${a} dm`),SI('🧵','Đoạn thứ hai',`${b} dm`),SI('📏','Cả hai đoạn','? dm')]}),
-  ()=>F(`Quãng đường từ nhà Nam đến chợ dài ${a} km, từ chợ đến bến xe dài ${b} km. Hỏi quãng đường từ nhà Nam qua chợ đến bến xe dài bao nhiêu ki-lô-mét?`,a+b,{u:'km',long:true,sc:[SI('🏠','Nhà → Chợ',`${a} km`),SI('🏪','Chợ → Bến xe',`${b} km`),SI('🚏','Cả quãng đường','? km')]}),
-  ()=>{const c=a+b;return F(`Cuộn vải dài ${c} m, đã cắt đi ${b} m. Hỏi cuộn vải còn lại bao nhiêu mét?`,a,{u:'m',long:true,sc:[SI('🧶','Cuộn vải',`${c} m`),SI('✂️','Cắt đi',`${b} m`),SI('❔','Còn lại','? m')]})},
+  ()=>F(`Đoạn dây thứ nhất dài ${a} dm, đoạn dây thứ hai dài ${b} dm. Hỏi cả hai đoạn dây dài bao nhiêu đề-xi-mét?`,a+b,{u:'dm',long:true,bm:{t:'sum',a,b,l:'Hai đoạn',e:'🧵',u:'dm'},sc:[SI('🧵','Đoạn thứ nhất',`${a} dm`),SI('🧵','Đoạn thứ hai',`${b} dm`),SI('📏','Cả hai đoạn','? dm')]}),
+  ()=>F(`Quãng đường từ nhà Nam đến chợ dài ${a} km, từ chợ đến bến xe dài ${b} km. Hỏi quãng đường từ nhà Nam qua chợ đến bến xe dài bao nhiêu ki-lô-mét?`,a+b,{u:'km',long:true,bm:{t:'sum',a,b,l:'Nhà → bến',e:'🏠',u:'km'},sc:[SI('🏠','Nhà → Chợ',`${a} km`),SI('🏪','Chợ → Bến xe',`${b} km`),SI('🚏','Cả quãng đường','? km')]}),
+  ()=>{const c=a+b;return F(`Cuộn vải dài ${c} m, đã cắt đi ${b} m. Hỏi cuộn vải còn lại bao nhiêu mét?`,a,{u:'m',long:true,bm:{t:'diff',c,b,l:'Cuộn vải',e:'🧶',u:'m'},sc:[SI('🧶','Cuộn vải',`${c} m`),SI('✂️','Cắt đi',`${b} m`),SI('❔','Còn lại','? m')]})},
 ])()});
 const DEN=[100,200,500,1000];
 def('money',()=>pick([
@@ -980,8 +1081,8 @@ def('money',()=>pick([
   ()=>F('{_} tờ 200 đồng bằng 1 000 đồng',5),
   ()=>F('1 000 đồng đổi được {_} tờ 100 đồng',10),
   ()=>{const a=pick([[200,'2 tờ 100 đồng','=',200],[500,'2 tờ 200 đồng','>',400],[1000,'3 tờ 200 đồng','>',600],[500,'3 tờ 200 đồng','<',600]]);return F(`${fmt(a[0])} đồng {_} ${a[1]}`,a[2],{opts:['>','<','=']})},
-  ()=>{const a=pick([200,500]),b=pick([100,200,500]);const [N]=two2();return F(`${N} có ${a} đồng, mẹ cho thêm ${b} đồng. Hỏi ${N} có tất cả bao nhiêu tiền?`,a+b,{u:'đồng',long:true,sc:[SI('💵',N+' có',`${a} đồng`),SI('💵','Mẹ cho thêm',`${b} đồng`),SI('❔','Tất cả','? đồng')]})},
-  ()=>{const b=pick([200,300,500,700]);return F(`Mai có 1 000 đồng, Mai mua một cái bút chì hết ${b} đồng. Hỏi Mai còn lại bao nhiêu tiền?`,1000-b,{u:'đồng',long:true,sc:[SI('💵','Mai có','1 000 đồng'),SI('✏️','Bút chì',`${b} đồng`),SI('❔','Còn lại','? đồng')]})},
+  ()=>{const a=pick([200,500]),b=pick([100,200,500]);const [N]=two2();return F(`${N} có ${a} đồng, mẹ cho thêm ${b} đồng. Hỏi ${N} có tất cả bao nhiêu tiền?`,a+b,{u:'đồng',long:true,bm:{t:'sum',a,b,l:N,e:'💵',u:'đồng'},sc:[SI('💵',N+' có',`${a} đồng`),SI('💵','Mẹ cho thêm',`${b} đồng`),SI('❔','Tất cả','? đồng')]})},
+  ()=>{const b=pick([200,300,500,700]);return F(`Mai có 1 000 đồng, Mai mua một cái bút chì hết ${b} đồng. Hỏi Mai còn lại bao nhiêu tiền?`,1000-b,{u:'đồng',long:true,bm:{t:'diff',c:1000,b,l:'Mai',e:'💵',u:'đồng'},sc:[SI('💵','Mai có','1 000 đồng'),SI('✏️','Bút chì',`${b} đồng`),SI('❔','Còn lại','? đồng')]})},
 ])());
 
 /* --- Cộng trừ trong phạm vi 1000 --- */
@@ -996,10 +1097,10 @@ function arith3(p,op,tron){return()=>{if(tron&&Math.random()<.3){if(op==='+'){co
 def('add1000nc',arith3(p3nc,'+',true));def('add1000c',arith3(p3c,'+'));
 def('sub1000nc',arith3(s3nc,'-',true));def('sub1000c',arith3(s3c,'-'));
 def('w1000',()=>pick([
-  ()=>{const [a,b]=p3nc();return F(`Trường Tiểu học Hòa Bình có ${a} học sinh nam và ${b} học sinh nữ. Hỏi trường có tất cả bao nhiêu học sinh?`,a+b,{u:'học sinh',long:true,sc:[SI('👦','Học sinh nam',`${a}`),SI('👧','Học sinh nữ',`${b}`),SI('🏫','Cả trường','?')]})},
-  ()=>{const [a,b]=s3c();return F(`Một cửa hàng có ${a} kg gạo, đã bán ${b} kg gạo. Hỏi cửa hàng còn lại bao nhiêu ki-lô-gam gạo?`,a-b,{u:'kg',long:true,sc:[SI('🍚','Có',`${a} kg`),SI('🏪','Đã bán',`${b} kg`),SI('❔','Còn lại','? kg')]})},
-  ()=>{const [a,b]=p3c();return F(`Đàn vịt có ${a} con, đàn gà có ${b} con. Hỏi cả hai đàn có bao nhiêu con?`,a+b,{u:'con',long:true,sc:[SI('🦆','Đàn vịt',`${a} con`),SI('🐔','Đàn gà',`${b} con`),SI('❔','Cả hai đàn','? con')]})},
-  ()=>{const [a,b]=s3nc();return F(`Thư viện có ${a} quyển sách, đã cho mượn ${b} quyển. Hỏi thư viện còn lại bao nhiêu quyển sách?`,a-b,{u:'quyển',long:true,sc:[SI('📚','Thư viện có',`${a} quyển`),SI('🧒','Cho mượn',`${b} quyển`),SI('❔','Còn lại','? quyển')]})},
+  ()=>{const [a,b]=p3nc();return F(`Trường Tiểu học Hòa Bình có ${a} học sinh nam và ${b} học sinh nữ. Hỏi trường có tất cả bao nhiêu học sinh?`,a+b,{u:'học sinh',long:true,bm:{t:'sum',a,b,l:'Nam + nữ',e:'🏫',u:'HS'},sc:[SI('👦','Học sinh nam',`${a}`),SI('👧','Học sinh nữ',`${b}`),SI('🏫','Cả trường','?')]})},
+  ()=>{const [a,b]=s3c();return F(`Một cửa hàng có ${a} kg gạo, đã bán ${b} kg gạo. Hỏi cửa hàng còn lại bao nhiêu ki-lô-gam gạo?`,a-b,{u:'kg',long:true,bm:{t:'diff',c:a,b,l:'Gạo',e:'🍚',u:'kg'},sc:[SI('🍚','Có',`${a} kg`),SI('🏪','Đã bán',`${b} kg`),SI('❔','Còn lại','? kg')]})},
+  ()=>{const [a,b]=p3c();return F(`Đàn vịt có ${a} con, đàn gà có ${b} con. Hỏi cả hai đàn có bao nhiêu con?`,a+b,{u:'con',long:true,bm:{t:'sum',a,b,l:'Vịt + gà',e:'🦆',u:'con'},sc:[SI('🦆','Đàn vịt',`${a} con`),SI('🐔','Đàn gà',`${b} con`),SI('❔','Cả hai đàn','? con')]})},
+  ()=>{const [a,b]=s3nc();return F(`Thư viện có ${a} quyển sách, đã cho mượn ${b} quyển. Hỏi thư viện còn lại bao nhiêu quyển sách?`,a-b,{u:'quyển',long:true,bm:{t:'diff',c:a,b,l:'Thư viện',e:'📚',u:'quyển'},sc:[SI('📚','Thư viện có',`${a} quyển`),SI('🧒','Cho mượn',`${b} quyển`),SI('❔','Còn lại','? quyển')]})},
 ])());
 
 /* --- Thống kê, xác suất --- */
@@ -1327,8 +1428,43 @@ function countPic(rows){
 function picText(){return null}
 function bigItem(e){const k=typeof ICON!=='undefined'&&typeof icoFor==='function'?icoFor(e):null;return k&&ICON[k]?`<img src="${ICON[k]}" alt="">`:e}
 function scenePic(items){return '<div class="scene">'+items.map(it=>`<div class="sc-it ${it.val.includes('?')?'q':''}"><span class="sc-ic">${it.e==='❔'?'?':bigItem(it.e)}</span><b>${esc(it.lab)}</b><span class="sc-v">${esc(it.val)}</span></div>`).join('')+'</div>'}
-function picFor(f){if(f.html)return null;return (f.cnt&&countPic(f.cnt))||(f.sc?scenePic(f.sc):null)}
+function picFor(f){if(f.html)return null;return (f.cnt&&countPic(f.cnt))||(f.bm?barPic(f.bm):null)||(f.sc?scenePic(f.sc):null)}
 function sticker(){return null}
+
+/* ================= SƠ ĐỒ ĐOẠN THẲNG (tóm tắt bài toán) ================= */
+function barPic(m){
+  const u=m.u?(' '+m.u):'';const LX=96,W=230;let rows=[],br=[];
+  const S=(v,st,txt)=>({v,st,txt});
+  switch(m.t){
+    case 'sum':rows=[{lab:m.l||'',e:m.e,segs:[S(m.a,'a',m.a+''),S(m.b,'b',m.b+'')]}];br=[{r:0,f:0,to:m.a+m.b,txt:'?'+u,pos:'b',q:1}];break;
+    case 'diff':rows=[{lab:m.l||'',e:m.e,segs:[S(m.c-m.b,'a','?'),S(m.b,'x',m.b+'')]}];br=[{r:0,f:0,to:m.c,txt:m.c+u,pos:'t'},{r:0,f:0,to:m.c-m.b,txt:(m.lr||'Còn lại')+' ?',pos:'b',q:1}];break;
+    case 'more':rows=[{lab:m.n1,e:m.e,segs:[S(m.a,'a',m.a+u)]},{lab:m.n2,e:m.e2||m.e,segs:[S(m.a,'a',''),S(m.b,'d',m.b+'')]}];br=[{r:1,f:0,to:m.a+m.b,txt:'?'+u,pos:'b',q:1}];break;
+    case 'less':rows=[{lab:m.n1,e:m.e,segs:[S(m.a,'a',m.a+u)]},{lab:m.n2,e:m.e2||m.e,segs:[S(m.a-m.b,'a',''),S(m.b,'g',m.b+'')]}];br=[{r:1,f:0,to:m.a-m.b,txt:'?'+u,pos:'b',q:1}];break;
+    case 'cmp':{const hi=Math.max(m.a,m.b),lo=Math.min(m.a,m.b);rows=[{lab:m.n1,e:m.e,segs:[S(m.a,'a',m.a+u)]},{lab:m.n2,e:m.e2||m.e,segs:[S(m.b,'b',m.b+u)]}];br=[{r:m.a>=m.b?0:1,f:lo,to:hi,txt:'?',pos:m.a>=m.b?'t':'b',q:1}];break}
+    case 'mul':rows=[{lab:m.l||'',e:m.e,segs:Array.from({length:m.k},()=>S(m.each,'a',m.each+''))}];br=[{r:0,f:0,to:m.k*m.each,txt:'?'+u,pos:'b',q:1}];break;
+    case 'div':rows=[{lab:m.l||'',e:m.e,segs:Array.from({length:m.k},(_,i)=>S(m.c/m.k,i===0?'b':'a',i===0?'?':''))}];br=[{r:0,f:0,to:m.c,txt:m.c+u,pos:'t'}];break;
+    case 'divg':rows=[{lab:m.l||'',e:m.e,segs:Array.from({length:m.c/m.each},(_,i)=>S(m.each,i===0?'b':'a',i===0?m.each+'':''))}];br=[{r:0,f:0,to:m.c,txt:m.c+u,pos:'t'},{r:0,f:0,to:m.c,txt:'? '+(m.unit2||'phần'),pos:'b',q:1}];break;
+  }
+  const max=Math.max(...rows.map(r=>r.segs.reduce((s,x)=>s+x.v,0)));const k=W/max;
+  const RH=100,TOP=52,H=rows.length*RH+TOP-18;let g='';
+  rows.forEach((r,ri)=>{const y=ri*RH+TOP;
+    g+=`<text x="${LX-12}" y="${y+21}" text-anchor="end" class="tx bm-l">${esc(r.lab)}</text>`;
+    let x=LX;r.segs.forEach(sg=>{const w=Math.max(sg.v*k,6);
+      const cls=sg.st==='x'?'bm-x':sg.st==='d'?'bm-d':sg.st==='g'?'bm-g':sg.st==='b'?'bm-b':'bm-a';
+      g+=`<rect x="${x}" y="${y}" width="${w}" height="30" rx="6" class="${cls}"/>`;
+      if(sg.st==='x')g+=`<line x1="${x+3}" y1="${y+27}" x2="${x+w-3}" y2="${y+3}" class="bm-cross"/>`;
+      if(sg.txt&&w>18)g+=`<text x="${x+w/2}" y="${y+21}" text-anchor="middle" class="tx bm-t">${esc(sg.txt)}</text>`;
+      x+=w});
+  });
+  br.forEach(b=>{const y0=b.r*RH+TOP;const x1=LX+b.f*k,x2=LX+b.to*k,mx=(x1+x2)/2;
+    if(b.pos==='b'){const y=y0+36;g+=`<path d="M${x1} ${y} q0 8 8 8 H${mx-6} l6 7 l6 -7 H${x2-8} q8 0 8 -8" class="bm-br"/>`;
+      g+=b.q?`<g transform="translate(${mx},${y+32})"><rect x="${-Math.max(26,b.txt.length*5+10)}" y="-14" width="${Math.max(52,b.txt.length*10+20)}" height="26" rx="8" class="bm-q"/><text y="5" text-anchor="middle" class="tx bm-qt">${esc(b.txt)}</text></g>`:`<text x="${mx}" y="${y+34}" text-anchor="middle" class="tx bm-t">${esc(b.txt)}</text>`}
+    else{const y=y0-6;g+=`<path d="M${x1} ${y} q0 -8 8 -8 H${mx-6} l6 -7 l6 7 H${x2-8} q8 0 8 8" class="bm-br"/>`;
+      g+=b.q?`<g transform="translate(${mx},${y-24})"><rect x="-26" y="-14" width="52" height="26" rx="8" class="bm-q"/><text y="5" text-anchor="middle" class="tx bm-qt">${esc(b.txt)}</text></g>`:`<text x="${mx}" y="${y-22}" text-anchor="middle" class="tx bm-t">${esc(b.txt)}</text>`}
+  });
+  const icons=rows.map(r=>r.e?`<span>${bigItem(r.e)}</span>`:'').join('');
+  return `<div class="bm"><div class="bm-ic">${[...new Set(rows.map(r=>r.e).filter(Boolean))].map(e=>`<span>${bigItem(e)}</span>`).join('')}</div><svg viewBox="0 0 ${LX+W+24} ${H+24}" width="${LX+W+24}" style="max-width:100%;height:auto">${g}</svg></div>`;
+}
 
 /* ================= LƯU TRỮ & ÂM THANH ================= */
 const store={get(k,d){try{const v=localStorage.getItem('toan2_'+k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem('toan2_'+k,JSON.stringify(v))}catch(e){}}};
@@ -1578,11 +1714,12 @@ VIEWS.exam=()=>{
 function finishExam(timeout){
   const ex=EX;if(ex.done)return;ex.done=true;ex.timeout=timeout;ex.used=Math.round((Date.now()-ex.start)/1000);
   ex.qs.forEach(q=>q.ok=check(q));const c=ex.qs.filter(q=>q.ok).length;ex.correct=c;ex.score=Math.round(c/ex.qs.length*100)/10;
-  const H=store.get('history',[]);const d=new Date();
+  const H=store.get(HK(),[]);const d=new Date();
   H.unshift({name:ex.name,date:d.toLocaleDateString('vi-VN')+' '+d.toLocaleTimeString('vi-VN',{hour:'2-digit',minute:'2-digit'}),score:ex.score,correct:c,total:ex.qs.length,lessons:ex.lessons,used:ex.used,
     weak:Object.entries(byLesson(ex.qs)).filter(([,v])=>v.c/v.t<.6).map(([k])=>+k)});
-  store.set('history',H.slice(0,60));
+  store.set(HK(),H.slice(0,60));
   if(timeout)SND.no();else if(ex.score>=8)SND.win();
+  if(typeof onExamDone==='function')ex.rw=onExamDone(ex);
   go('result');
 }
 function byLesson(qs){const m={};qs.forEach(q=>{m[q.lesson]=m[q.lesson]||{c:0,t:0};m[q.lesson].t++;if(q.ok)m[q.lesson].c++});return m}
@@ -1615,14 +1752,16 @@ VIEWS.result=()=>{
   const ex=EX;const cm=comment(ex);const st=ex.score>=9?3:ex.score>=7?2:ex.score>=5?1:0;
   const bl=byLesson(ex.qs);
   main().innerHTML=`<div class="res"><div class="card score pop"><div class="eyebrow">Kết quả của ${esc(ex.name)}</div><div class="big">${String(ex.score).replace('.',',')}<small>/10</small></div>
-    <div class="stars" aria-label="${st} sao">${[0,1,2].map(i=>`<span class="${i<st?'':'off'}">⭐</span>`).join('')}</div><div><b>${ex.correct}/${ex.qs.length}</b> câu đúng</div><img src="${av(cm.img)}" alt=""></div>
+    <div class="stars" aria-label="${st} sao">${[0,1,2].map(i=>`<span class="${i<st?'':'off'}">⭐</span>`).join('')}</div><div><b>${ex.correct}/${ex.qs.length}</b> câu đúng</div><img src="${av(cm.img)}" alt="">${ex.rw?rewardHtml(ex.rw):''}</div>
   <div class="card cmt"><div class="eyebrow">Nhận xét</div><h3>${cm.title}</h3><p>${cm.txt}</p>${cm.extra.map(x=>`<p>${x}</p>`).join('')}
     ${cm.tips.length?`<div class="advice"><b>Gợi ý cho phụ huynh:</b><ul>${cm.tips.map(t=>`<li>Cùng con ${esc(t)}.</li>`).join('')}</ul></div>`:''}
     <div style="overflow-x:auto"><table class="tbl"><thead><tr><th>Bài</th><th>Đúng</th><th style="width:40%">Mức độ</th></tr></thead><tbody>${Object.entries(bl).sort((a,b)=>a[0]-b[0]).map(([k,v])=>{const p=v.c/v.t;return `<tr><td>Bài ${k}. ${esc(LBY[k].name)}</td><td class="n">${v.c}/${v.t}</td><td><div class="bar"><i class="${p<.5?'low':p<.8?'mid':''}" style="width:${Math.max(4,p*100)}%"></i></div></td></tr>`}).join('')}</tbody></table></div>
-    <div class="row"><button class="btn blue" id="rv">🔍 Xem lại bài làm</button><button class="btn primary" id="again">🔁 Làm đề mới</button>${cm.weak.length?'<button class="btn yellow" id="weak">🎯 Luyện bài còn yếu</button>':''}<button class="btn" id="st">⚙ Đổi cài đặt</button></div></div></div>`;
+    <div class="row">${ex.mode==='lesson'&&nextLesson(ex.lessons[0])?`<button class="btn green" id="nxl">Học bài tiếp theo →</button>`:''}<button class="btn blue" id="rv">🔍 Xem lại bài làm</button><button class="btn primary" id="again">🔁 Làm đề mới</button>${cm.weak.length?'<button class="btn yellow" id="weak">🎯 Luyện bài còn yếu</button>':''}<button class="btn" id="st">⚙ Đổi cài đặt</button></div></div></div>`;
   if(ex.score>=8){confetti()}
+  if($('#nxl'))$('#nxl').onclick=()=>startLesson(nextLesson(ex.lessons[0]));
+  if(ex.rw)later(()=>rewardPopups(ex.rw),700);
   $('#rv').onclick=()=>go('review');
-  $('#again').onclick=()=>startExam(ex.lessons,ex.types,ex.n,ex.min);
+  $('#again').onclick=()=>ex.mode==='lesson'?startLesson(ex.lessons[0]):startExam(ex.lessons,ex.types,ex.n,ex.min);
   $('#st').onclick=()=>go('setup');
   if($('#weak'))$('#weak').onclick=()=>startExam(cm.weak,ex.types,ex.n,ex.min);
 };
@@ -1687,7 +1826,7 @@ function gameAsk(host,q,sec,onDone,opt={}){
   const card=$('.qcard',host);let done=false,t0=Date.now(),tid=null,lastS=-1;
   const footer=q.type==='mc'?`<div class="qact"><span class="muted" id="hint">👆 Bấm vào đáp án con chọn là xong.</span></div>`:`<div class="qact"><span class="muted" id="hint"></span><button class="btn primary big" id="lock">Trả lời ✓</button></div>`;
   const draw=()=>{card._q=q;card._rv=false;renderQ(q,card,{showLesson:true,footer,autoMc:true,onLock:()=>lockF(),onEnter:()=>lockF()})};
-  const finish=(ok,to)=>{if(done)return;done=true;if(tid)clearInterval(tid);card._rv=true;renderQ(q,card,{review:true,showLesson:true});ok?SND.ok():SND.no();onDone(ok,to)};
+  const finish=(ok,to)=>{if(done)return;done=true;if(ok)window.GCOR=(window.GCOR||0)+1;if(tid)clearInterval(tid);card._rv=true;renderQ(q,card,{review:true,showLesson:true});ok?SND.ok():SND.no();onDone(ok,to)};
   const lockF=()=>{if(!answered(q)){$('#hint',card).textContent='Con hãy trả lời trước khi chốt nhé!';return}finish(check(q),false)};
   draw();
   if(sec){tid=every(()=>{const r=Math.max(0,sec-(Date.now()-t0)/1000);const i=$('.tbar i',host);if(i){i.style.width=(r/sec*100)+'%';i.className=r/sec<.25?'low':r/sec<.5?'mid':''}
@@ -1702,12 +1841,14 @@ function fbModal(ok,to,html,btn,cb){
 function genPool(c,n){return makeSet(c.lessons,c.types,n)}
 function endScreen(host,{title,big,sub,win,again,gid,c}){
   if(win){SND.win();confetti(120)}
+  const grw=typeof onGameDone==='function'?onGameDone(gid):null;
   host.innerHTML=`<div class="card panel pop" style="align-items:center;text-align:center"><img src="${win?(P.av==='g'?IMG.g_yay:IMG.b_jump):(P.av==='g'?IMG.g_wave:IMG.b_wave)}" alt="" style="height:170px"><h2 style="font-size:34px">${title}</h2>
-  ${big?`<div style="font-family:var(--display);font-size:46px;font-weight:800;color:var(--red)">${big}</div>`:''}<div class="muted" style="max-width:52ch">${sub||''}</div>
+  ${big?`<div style="font-family:var(--display);font-size:46px;font-weight:800;color:var(--red)">${big}</div>`:''}<div class="muted" style="max-width:52ch">${sub||''}</div>${grw?rewardHtml(grw):''}
   <div class="row" style="justify-content:center"><button class="btn primary" id="ag">🔁 Chơi lại</button><button class="btn" id="cf">⚙ Đổi cài đặt</button><button class="btn" id="gl">🎮 Trò chơi khác</button></div></div>`;
   $('#ag',host).onclick=()=>go('play',gid,c);$('#cf',host).onclick=()=>go('gsetup',gid);$('#gl',host).onclick=()=>go('games');
+  if(grw)later(()=>rewardPopups(grw),900);
 }
-VIEWS.play=(gid,c)=>{const g=GAMES.find(x=>x.id===gid);main().innerHTML=`<div class="stage ${g.cls}" id="stg"></div>`;GPLAY[gid]($('#stg'),c,g)};
+VIEWS.play=(gid,c)=>{window.GCOR=0;const g=GAMES.find(x=>x.id===gid);main().innerHTML=`<div class="stage ${g.cls}" id="stg"></div>`;GPLAY[gid]($('#stg'),c,g)};
 const GPLAY={};
 
 /* --- Ai là triệu phú --- */
@@ -1878,6 +2019,196 @@ function carPicker(el,val,onPick){
 }
 
 /* ================= KHỞI ĐỘNG ================= */
+
+
+/* ================= HỌC TẬP TÍCH LŨY (kiểu Duolingo) =================
+ Hồ sơ nhiều bé · sao · chuỗi ngày học · mục tiêu ngày · thú cưng lớn dần · lộ trình 75 bài · huy hiệu · trang phụ huynh */
+const PROF=store.get('profiles',null)||{cur:'p1',list:[{id:'p1',name:P.name||'',av:P.av||'g'}]};
+const saveProf=()=>store.set('profiles',PROF);
+const curProf=()=>PROF.list.find(x=>x.id===PROF.cur)||PROF.list[0];
+function HK(){return 'hist_'+PROF.cur}
+// chuyển lịch sử cũ sang hồ sơ đầu tiên
+(function(){const old=store.get('history',null);if(old&&old.length&&!store.get('hist_p1',null)){store.set('hist_p1',old)}saveProf();const cp=curProf();P.name=cp.name;P.av=cp.av})();
+const PD0=()=>({stars:0,streak:0,best:0,last:'',days:{},lessons:{},pet:{name:'Gà Bông',fed:0},badges:[],games:0,acts:0,perfect:0});
+function PD(){return Object.assign(PD0(),store.get('pd_'+PROF.cur,{}))}
+const savePD=d=>store.set('pd_'+PROF.cur,d);
+const today=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
+const yday=()=>{const d=new Date(Date.now()-864e5);return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
+const GOAL=3; // hoạt động mỗi ngày
+const PET=[{f:0,e:'🥚',n:'Quả trứng'},{f:3,e:'🐣',n:'Vừa nở'},{f:8,e:'🐥',n:'Gà con'},{f:15,e:'🐔',n:'Gà lớn'},{f:25,e:'🐓',n:'Gà Vua',crown:1}];
+const petStage=fed=>{let i=0;PET.forEach((p,k)=>{if(fed>=p.f)i=k});return i};
+const lessonStars=pct=>pct>=1?3:pct>=.8?2:pct>=.5?1:0;
+function liveStreak(d){return d.last===today()||d.last===yday()?d.streak:0}
+const BADGES=[
+  {id:'first',ico:'🌱',name:'Khởi đầu',desc:'Hoàn thành hoạt động đầu tiên',ok:d=>d.acts>=1},
+  {id:'perfect',ico:'💯',name:'Điểm 10',desc:'Làm đúng hết một bài',ok:d=>d.perfect>=1},
+  {id:'perfect5',ico:'🎯',name:'Thần đồng',desc:'5 lần làm đúng hết',ok:d=>d.perfect>=5},
+  {id:'s3',ico:'🔥',name:'Chăm chỉ 3 ngày',desc:'Học 3 ngày liên tiếp',ok:d=>d.best>=3},
+  {id:'s7',ico:'🔥',name:'Chăm chỉ 7 ngày',desc:'Học 7 ngày liên tiếp',ok:d=>d.best>=7},
+  {id:'s30',ico:'☄️',name:'Cả tháng',desc:'Học 30 ngày liên tiếp',ok:d=>d.best>=30},
+  {id:'l10',ico:'📘',name:'10 bài học',desc:'10 bài đạt ít nhất 1 sao',ok:d=>doneCount(d)>=10},
+  {id:'l30',ico:'📚',name:'30 bài học',desc:'30 bài đạt ít nhất 1 sao',ok:d=>doneCount(d)>=30},
+  {id:'l75',ico:'🎓',name:'Cả năm học',desc:'Cả 75 bài đạt ít nhất 1 sao',ok:d=>doneCount(d)>=75},
+  {id:'topic',ico:'🏅',name:'Xong một chủ đề',desc:'Mọi bài trong 1 chủ đề đạt sao',ok:d=>CD.some(c=>L.filter(l=>l.cd===c.id).every(l=>(d.lessons[l.id]||{}).stars>0))},
+  {id:'tap1',ico:'🏆',name:'Xong Tập một',desc:'Bài 1–36 đều đạt sao',ok:d=>L.filter(l=>l.id<=36).every(l=>(d.lessons[l.id]||{}).stars>0)},
+  {id:'three',ico:'👑',name:'Ba sao vàng',desc:'10 bài đạt 3 sao',ok:d=>Object.values(d.lessons).filter(x=>x.stars>=3).length>=10},
+  {id:'st100',ico:'⭐',name:'100 sao',desc:'Tích lũy 100 sao',ok:d=>d.stars>=100},
+  {id:'st500',ico:'🌟',name:'500 sao',desc:'Tích lũy 500 sao',ok:d=>d.stars>=500},
+  {id:'st1000',ico:'✨',name:'1000 sao',desc:'Tích lũy 1000 sao',ok:d=>d.stars>=1000},
+  {id:'g5',ico:'🎮',name:'Tay chơi',desc:'Chơi 5 trò chơi',ok:d=>d.games>=5},
+  {id:'g20',ico:'🕹️',name:'Vua trò chơi',desc:'Chơi 20 trò chơi',ok:d=>d.games>=20},
+  {id:'hatch',ico:'🐣',name:'Nở rồi!',desc:'Ấp nở thú cưng',ok:d=>petStage(d.pet.fed)>=1},
+  {id:'king',ico:'🐓',name:'Gà Vua',desc:'Nuôi thú cưng lớn hết cỡ',ok:d=>petStage(d.pet.fed)>=4},
+];
+function doneCount(d){return Object.values(d.lessons).filter(x=>x.stars>0).length}
+function addActivity(d,stars,pct){
+  const t=today();const before=liveStreak(d);let streakUp=false;
+  if(d.last!==t){d.streak=d.last===yday()?d.streak+1:1;d.last=t;streakUp=true}
+  d.best=Math.max(d.best,d.streak);
+  d.days[t]=(d.days[t]||0)+1;d.acts++;d.stars+=stars;
+  const st0=petStage(d.pet.fed);let fed=false;if(pct>=.8){d.pet.fed++;fed=true}
+  const stageUp=petStage(d.pet.fed)>st0;
+  const newB=BADGES.filter(b=>!d.badges.includes(b.id)&&b.ok(d));newB.forEach(b=>d.badges.push(b.id));
+  return {stars,streak:d.streak,streakUp:streakUp&&d.streak>1,fed,stageUp,stage:petStage(d.pet.fed),newBadges:newB.map(b=>b.id),goalNow:d.days[t],goalDone:d.days[t]===GOAL};
+}
+function onExamDone(ex){
+  const d=PD();const pct=ex.correct/ex.qs.length;
+  if(pct===1)d.perfect++;
+  let stars=ex.correct+(pct===1?5:0);
+  const les=[];
+  Object.entries(byLesson(ex.qs)).forEach(([id,v])=>{if(ex.mode!=='lesson'&&v.t<3)return;const p=v.c/v.t;const o=d.lessons[id]||{best:0,stars:0,n:0};o.n++;o.best=Math.max(o.best,p);const ns=lessonStars(p);if(ns>o.stars){les.push({id:+id,from:o.stars,to:ns});o.stars=ns}d.lessons[id]=o});
+  const rw=addActivity(d,stars,pct);rw.lessons=les;savePD(d);return rw;
+}
+function onGameDone(gid){
+  const d=PD();d.games++;const c=window.GCOR||0;const rw=addActivity(d,c,0);savePD(d);window.GCOR=0;return rw;
+}
+function rewardHtml(rw){
+  return `<div class="rwbox"><span class="rw"><b>+${rw.stars}</b> ⭐</span><span class="rw">🔥 <b>${rw.streak}</b> ngày</span>${rw.fed?'<span class="rw">🍚 Thú cưng được ăn</span>':''}${(rw.lessons||[]).map(l=>`<span class="rw">Bài ${l.id}: ${'★'.repeat(l.to)}${'☆'.repeat(3-l.to)}</span>`).join('')}</div>`;
+}
+function rewardPopups(rw){
+  const items=[];
+  if(rw.stageUp){const s=PET[rw.stage];items.push(`<div class="pp-big">${s.e}</div><h3>${s.n}!</h3><p>${esc(PD().pet.name)} đã lớn thêm một chút nhờ con chăm học.</p>`)}
+  rw.newBadges.forEach(id=>{const b=BADGES.find(x=>x.id===id);items.push(`<div class="pp-big">${b.ico}</div><h3>Huy hiệu mới: ${b.name}</h3><p>${b.desc}</p>`)});
+  if(rw.goalDone)items.push(`<div class="pp-big">🎯</div><h3>Xong mục tiêu hôm nay!</h3><p>Con đã hoàn thành ${GOAL} hoạt động hôm nay. Giỏi quá!</p>`);
+  if(rw.streakUp)items.push(`<div class="pp-big">🔥</div><h3>${rw.streak} ngày liên tiếp!</h3><p>Ngày mai nhớ quay lại học tiếp nhé.</p>`);
+  const show=i=>{if(i>=items.length)return;SND.win();const o=modal(`<div class="pp">${items[i]}</div><div class="row" style="justify-content:center"><button class="btn primary" id="ppn">${i<items.length-1?'Tiếp →':'Tuyệt vời!'}</button></div>`);$('#ppn',o).onclick=()=>{closeModal();show(i+1)}};
+  if(items.length){confetti(60);show(0)}
+}
+function nextLesson(after){const d=PD();const ids=L.map(l=>l.id);const start=after?ids.indexOf(after)+1:0;for(let i=start;i<ids.length;i++)if(!((d.lessons[ids[i]]||{}).stars>0))return ids[i];for(let i=0;i<ids.length;i++)if(!((d.lessons[ids[i]]||{}).stars>0))return ids[i];return after&&after<75?after+1:null}
+function startLesson(id){
+  const types=TYPES.map(t=>t.id).filter(t=>supportedTypes([id]).has(t));
+  startExam([id],types,10,0);EX.mode='lesson';
+}
+function weakLessons(){const d=PD();return Object.entries(d.lessons).filter(([,v])=>v.best<.6).map(([k])=>+k)}
+
+/* ---------- Thanh trên + thanh điều hướng ---------- */
+const NAV=[{v:'home',i:'🏠',t:'Học'},{v:'path',i:'🗺️',t:'Lộ trình'},{v:'setup',i:'📝',t:'Luyện tập'},{v:'games',i:'🎮',t:'Trò chơi'},{v:'badges',i:'🏅',t:'Huy hiệu'},{v:'parent',i:'👪',t:'Phụ huynh'}];
+let CURV='home';
+function header(){
+  const d=PD(),cp=curProf();
+  $('#top').innerHTML=`<div class="top-in"><button class="pchip" id="prof" aria-label="Đổi hồ sơ"><img src="${IMG[(cp.av==='b'?'b_':'g_')+'wave']}" alt=""><span>${esc(cp.name||'Bé')}</span>▾</button><span class="sp"></span>
+  <span class="stat" title="Chuỗi ngày học">🔥 <b>${liveStreak(d)}</b></span><span class="stat" title="Số sao">⭐ <b>${d.stars}</b></span><button class="ibtn" id="snd" aria-label="Bật/tắt âm thanh">${P.sound?'🔊':'🔈'}</button></div>
+  <nav class="nav" id="nav">${NAV.map(n=>`<button data-v="${n.v}" class="${CURV===n.v?'on':''}"><i>${n.i}</i><span>${n.t}</span></button>`).join('')}</nav>`;
+  $('#prof').onclick=profileModal;
+  $('#snd').onclick=()=>{P.sound=!P.sound;saveP();$('#snd').textContent=P.sound?'🔊':'🔈'};
+  $$('#nav button').forEach(b=>b.onclick=()=>go(b.dataset.v));
+}
+const _go=go;
+go=function(view,...a){const map={history:'parent',review:'review'};CURV=['home','path','setup','games','badges','parent'].includes(view)?view:(['gsetup','play'].includes(view)?'games':['exam','result','review'].includes(view)?CURV:CURV);_go(map[view]||view,...a);header()};
+function profileModal(){
+  const draw=()=>{const o=modal(`<div class="pk-h"><h3>Ai đang học?</h3><button class="ibtn" id="px">✕</button></div>
+    <div class="plist">${PROF.list.map(p=>`<button class="pitem ${p.id===PROF.cur?'on':''}" data-id="${p.id}"><img src="${IMG[(p.av==='b'?'b_':'g_')+'wave']}" alt=""><b>${esc(p.name||'Bé')}</b><small>⭐ ${Object.assign(PD0(),store.get('pd_'+p.id,{})).stars}</small></button>`).join('')}</div>
+    <div class="eyebrow">Thêm bé mới</div><div class="row"><input class="inp" id="pnm" placeholder="Tên của bé"><div class="chips" id="pav"></div><button class="btn green" id="padd">Thêm</button></div>`,'wide');
+    let av='g';chipGroup($('#pav',o),[{v:'g',l:'👧'},{v:'b',l:'👦'}],av,v=>av=v);
+    $('#px',o).onclick=closeModal;
+    $$('.pitem',o).forEach(b=>b.onclick=()=>{switchProfile(b.dataset.id)});
+    $('#padd',o).onclick=()=>{const n=$('#pnm',o).value.trim();if(!n){$('#pnm',o).focus();return}const id='p'+Date.now().toString(36);PROF.list.push({id,name:n,av});switchProfile(id)};
+  };draw();
+}
+function switchProfile(id){PROF.cur=id;saveProf();const cp=curProf();P.name=cp.name;P.av=cp.av;saveP();closeModal();go('home')}
+function onboarding(){
+  const o=modal(`<div style="text-align:center"><img src="${IMG.g_yay}" alt="" style="height:120px"><img src="${IMG.b_jump}" alt="" style="height:120px"></div><h3 style="font-size:26px;text-align:center">Chào con! Con tên là gì?</h3>
+  <input class="inp big" id="onm" placeholder="Nhập tên của con" style="max-width:none"><div class="chips" id="oav" style="justify-content:center"></div><button class="btn primary big" id="ogo">Bắt đầu học ▶</button>`);
+  let av='g';chipGroup($('#oav',o),[{v:'g',l:'👧 Bạn gái'},{v:'b',l:'👦 Bạn trai'}],av,v=>av=v);
+  $('#ogo',o).onclick=()=>{const n=$('#onm',o).value.trim();if(!n){$('#onm',o).focus();return}const cp=curProf();cp.name=n;cp.av=av;saveProf();switchProfile(cp.id)};
+}
+
+/* ---------- Trang Học (trang chủ) ---------- */
+function petScene(d,big=true){
+  const st=petStage(d.pet.fed),s=PET[st],nx=PET[st+1];
+  const prog=nx?`${d.pet.fed-s.f}/${nx.f-s.f}`:'Tối đa';const w=nx?Math.round((d.pet.fed-s.f)/(nx.f-s.f)*100):100;
+  return `<div class="sky ${big?'':'small'}"><span class="sun"></span><span class="cloud c1"></span><span class="cloud c2"></span><div class="nest"><span class="pet">${s.e}${s.crown?'<i class="crown">👑</i>':''}</span></div><span class="hill"></span></div>
+  <div class="petinfo"><span class="pname">${esc(d.pet.name)} <button class="mini" id="rn" aria-label="Đổi tên">✏️</button></span><span class="pstage">${s.n} · ${st+1}/${PET.length}</span></div>
+  <div class="feed"><div class="tbar"><i style="width:${w}%"></i></div><span>${nx?`${prog} bữa để lớn tiếp`:'Đã lớn hết cỡ!'}</span><small>Mỗi lần làm bài đúng từ 80% trở lên = 1 bữa ăn</small></div>`;
+}
+function speech(d){
+  const nl=nextLesson();const s=liveStreak(d);const n=esc(kidName());
+  if(!d.acts)return `Chào ${n}! Mình là ${esc(d.pet.name)}. Học bài đầu tiên để ấp mình nở nhé!`;
+  if((d.days[today()]||0)>=GOAL)return `Hôm nay ${n} học giỏi quá! Mai mình học tiếp nha.`;
+  if(s>=2)return `${n} đã học ${s} ngày liên tiếp rồi! Hôm nay mình học Bài ${nl} nha!`;
+  return `Hôm nay mình học tiếp Bài ${nl} nha ${n}!`;
+}
+VIEWS.home=()=>{
+  const d=PD();const nl=nextLesson();const weak=weakLessons();const tdone=d.days[today()]||0;
+  main().innerHTML=`<section class="hero2 card"><div class="bubble2">${speech(d)}</div>${petScene(d)}</section>
+  <section class="card panel today"><div class="ptitle"><h2>Hôm nay của ${esc(kidName())}</h2><span class="goal"><span class="ring" style="--p:${Math.min(1,tdone/GOAL)}">${Math.min(tdone,GOAL)}/${GOAL}</span> mục tiêu</span></div>
+    ${nl?`<button class="act blue" id="a1"><i>▶</i><span><b>Học tiếp</b><small>Bài ${nl}. ${esc(LBY[nl].name)}</small></span></button>`:''}
+    ${weak.length?`<button class="act orange" id="a2"><i>🎯</i><span><b>Ôn bài chưa vững</b><small>${weak.slice(0,4).map(x=>'Bài '+x).join(', ')}${weak.length>4?'…':''}</small></span></button>`:''}
+    <button class="act green" id="a3"><i>🗺️</i><span><b>Lộ trình học</b><small>${doneCount(d)}/75 bài đã có sao</small></span></button>
+    <button class="act violet" id="a4"><i>📝</i><span><b>Luyện tập tự chọn</b><small>Chọn bài, số câu, thời gian</small></span></button>
+    <button class="act red" id="a5"><i>🎮</i><span><b>Trò chơi</b><small>Triệu phú, Rung chuông vàng, Đua xe…</small></span></button>
+  </section>`;
+  if($('#a1'))$('#a1').onclick=()=>startLesson(nl);
+  if($('#a2'))$('#a2').onclick=()=>startExam(weak.slice(0,6),P.types,10,0);
+  $('#a3').onclick=()=>go('path');$('#a4').onclick=()=>go('setup');$('#a5').onclick=()=>go('games');
+  $('#rn').onclick=()=>{const o=modal(`<h3>Đặt tên cho thú cưng</h3><input class="inp big" id="pn" value="${esc(d.pet.name)}" style="max-width:none"><div class="row"><button class="btn" id="c">Huỷ</button><button class="btn primary" id="k">Lưu</button></div>`);$('#c',o).onclick=closeModal;$('#k',o).onclick=()=>{const v=$('#pn',o).value.trim();if(v){const dd=PD();dd.pet.name=v.slice(0,20);savePD(dd)}go('home')}};
+  if(!curProf().name)later(onboarding,300);
+};
+
+/* ---------- Lộ trình ---------- */
+VIEWS.path=()=>{
+  const d=PD();const nl=nextLesson();let k=0;
+  main().innerHTML=`<div class="ptitle" style="margin-bottom:6px"><h2 style="font-size:30px">🗺️ Lộ trình học</h2><span class="muted">${doneCount(d)}/75 bài có sao · bấm vào bài để học</span></div>
+  <div class="path">${CD.map(c=>{const ls=L.filter(l=>l.cd===c.id);const got=ls.filter(l=>(d.lessons[l.id]||{}).stars>0).length;
+    return `<div class="unit"><div class="uhead"><span class="uico">${typeof ICON!=='undefined'&&icoFor(CDPIC[c.id])&&ICON[icoFor(CDPIC[c.id])]?`<img src="${ICON[icoFor(CDPIC[c.id])]}" alt="">`:CDPIC[c.id]}</span><span><small>Chủ đề ${c.id}</small><b>${esc(c.name)}</b></span><span class="ucount">${got}/${ls.length}</span></div>
+    <div class="nodes">${ls.map(l=>{const s=(d.lessons[l.id]||{}).stars||0;const off=[0,1,2,1,0,-1,-2,-1][k++%8];
+      return `<div class="nd" style="--o:${off}"><button class="node ${s?'s'+s:''} ${l.id===nl?'cur':''}" data-l="${l.id}" aria-label="Bài ${l.id}">${l.id===nl?'<span class="go">BẮT ĐẦU</span>':''}<b>${l.id}</b></button><span class="nst">${'★'.repeat(s)}${'☆'.repeat(3-s)}</span><span class="nnm">${esc(l.name)}</span></div>`}).join('')}</div></div>`}).join('')}</div>`;
+  $$('.node').forEach(b=>b.onclick=()=>{const id=+b.dataset.l;const o=d.lessons[id];
+    const m=modal(`<div class="pk-h"><h3>Bài ${id}</h3><button class="ibtn" id="x">✕</button></div><p style="margin:0;font-size:19px;font-weight:700">${esc(LBY[id].name)}</p>
+      <p class="muted" style="margin:0">${o?`Điểm cao nhất: ${Math.round(o.best*100)}% · ${'★'.repeat(o.stars)}${'☆'.repeat(3-o.stars)} · đã học ${o.n} lần`:'Con chưa học bài này.'}</p>
+      <div class="muted" style="font-size:14px">★ đúng từ 50% · ★★ từ 80% · ★★★ đúng hết</div>
+      <button class="btn primary big" id="st">▶ Học bài này (10 câu)</button>`);
+    $('#x',m).onclick=closeModal;$('#st',m).onclick=()=>startLesson(id)});
+  const cur=$('.node.cur');if(cur)later(()=>cur.scrollIntoView({block:'center',behavior:'smooth'}),200);
+};
+
+/* ---------- Huy hiệu ---------- */
+VIEWS.badges=()=>{
+  const d=PD();
+  main().innerHTML=`<div class="ptitle" style="margin-bottom:12px"><h2 style="font-size:30px">🏅 Huy hiệu của ${esc(kidName())}</h2><span class="muted">${d.badges.length}/${BADGES.length} huy hiệu</span></div>
+  <div class="card panel" style="flex-direction:row;flex-wrap:wrap;gap:18px;align-items:center">${petScene(d,false)}</div>
+  <div class="badges">${BADGES.map(b=>{const on=d.badges.includes(b.id);return `<div class="bdg ${on?'on':''}"><span class="bi">${b.ico}</span><b>${b.name}</b><small>${b.desc}</small></div>`}).join('')}</div>`;
+  $('#rn')&&($('#rn').hidden=true);
+};
+
+/* ---------- Phụ huynh ---------- */
+VIEWS.parent=()=>{
+  const d=PD();const H=store.get(HK(),[]);const last7=[...Array(7)].map((_,i)=>{const t=new Date(Date.now()-(6-i)*864e5);const k=t.getFullYear()+'-'+String(t.getMonth()+1).padStart(2,'0')+'-'+String(t.getDate()).padStart(2,'0');return [['CN','T2','T3','T4','T5','T6','T7'][t.getDay()],d.days[k]||0]});
+  const avg=H.length?(H.slice(0,10).reduce((s,h)=>s+h.score,0)/Math.min(10,H.length)).toFixed(1).replace('.',','):'—';
+  main().innerHTML=`<div class="ptitle" style="margin-bottom:12px"><h2 style="font-size:30px">👪 Góc phụ huynh · ${esc(kidName())}</h2><span class="muted">Dữ liệu lưu trên trình duyệt của máy này</span></div>
+  <div class="kpis"><div class="card kpi"><small>Chuỗi ngày học</small><b>🔥 ${liveStreak(d)}</b><span class="muted">dài nhất ${d.best} ngày</span></div><div class="card kpi"><small>Tổng số sao</small><b>⭐ ${d.stars}</b><span class="muted">${d.acts} hoạt động</span></div>
+  <div class="card kpi"><small>Bài đã có sao</small><b>${doneCount(d)}/75</b><span class="muted">${Object.values(d.lessons).filter(x=>x.stars>=3).length} bài 3 sao</span></div><div class="card kpi"><small>Điểm TB 10 lần gần nhất</small><b>${avg}</b><span class="muted">${H.length} lần luyện tập</span></div></div>
+  <section class="card panel"><h3 style="font-size:22px">7 ngày qua</h3><div class="week">${last7.map(([t,n])=>`<div><span class="wb" style="height:${Math.min(100,n*25)+6}px"></span><b>${n}</b><small>${t}</small></div>`).join('')}</div></section>
+  <section class="card panel"><h3 style="font-size:22px">Mức độ thành thạo từng bài</h3><div class="muted" style="font-size:14px">Ô càng đậm màu xanh là bài con làm càng tốt. Ô trắng là bài chưa học, ô đỏ là bài chưa vững (dưới 50%).</div>
+    ${CD.map(c=>`<div class="mrow"><span>${CDPIC[c.id]} <b>Chủ đề ${c.id}</b></span><div class="mcells">${L.filter(l=>l.cd===c.id).map(l=>{const o=d.lessons[l.id];const cl=!o?'':o.best<.5?'m0':'m'+o.stars;return `<span class="mc ${cl}" title="Bài ${l.id}. ${esc(l.name)}${o?' – '+Math.round(o.best*100)+'%':''}">${l.id}</span>`}).join('')}</div></div>`).join('')}
+    ${weakLessons().length?`<div class="advice"><b>Bài cần ôn thêm:</b> ${weakLessons().map(id=>`Bài ${id} (${esc(LBY[id].name)})`).join('; ')}</div>`:''}</section>
+  <section class="card panel hist"><h3 style="font-size:22px">Lịch sử luyện tập</h3>
+  ${H.length?`<div style="overflow-x:auto"><table class="tbl"><thead><tr><th>Thời gian</th><th>Điểm</th><th>Đúng</th><th>Bài</th><th>Cần ôn</th></tr></thead><tbody>${H.map(h=>`<tr><td>${esc(h.date)}</td><td class="n"><b>${String(h.score).replace('.',',')}</b></td><td class="n">${h.correct}/${h.total}</td><td>${h.lessons.slice(0,8).map(x=>'B'+x).join(', ')}${h.lessons.length>8?'…':''}</td><td>${(h.weak||[]).map(x=>'B'+x).join(', ')||'—'}</td></tr>`).join('')}</tbody></table></div>`:'<div class="empty muted">Chưa có bài làm nào.</div>'}
+  <div class="row"><button class="btn" id="del">Xoá dữ liệu của ${esc(kidName())}</button></div></section>`;
+  $('#del').onclick=()=>{const o=modal(`<h3>Xoá toàn bộ sao, chuỗi ngày, thú cưng và lịch sử của ${esc(kidName())}?</h3><div class="row"><button class="btn" id="n">Không</button><button class="btn primary" id="y">Xoá</button></div>`);$('#n',o).onclick=closeModal;$('#y',o).onclick=()=>{savePD(PD0());store.set(HK(),[]);go('parent')}};
+};
+
+/* ---------- Khởi động ---------- */
 header();go('home');
 </script>
 </body></html>
