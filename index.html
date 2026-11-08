@@ -590,6 +590,31 @@ svg .tx.bm-qt{font:800 16px var(--display);fill:#7356E0;stroke:#fff}
 .nd{max-width:200px}
 .node.cur{margin-top:26px}
 @media (max-width:760px){.uhead{top:calc(env(safe-area-inset-top,0px) + 60px)}.nd{transform:translateX(calc(var(--o)*26px));max-width:170px}}
+/* ===== Thẻ học (hướng dẫn) ===== */
+.lr-top{display:flex;align-items:center;gap:12px;margin:10px 0}
+.lr-bar{flex:1;display:flex;gap:6px}
+.lr-bar i{flex:1;height:14px;border-radius:8px;background:var(--grid2);border:2px solid var(--line)}
+.lr-bar i.done{background:var(--green)}.lr-bar i.cur{background:var(--yellow)}
+.lr-title{font-weight:800;margin-bottom:8px}
+.lr-card{padding:22px;display:flex;flex-direction:column;gap:14px;min-height:300px}
+.lr-card h2{font-size:30px}
+.lr-tag{align-self:flex-start;background:var(--s-violet);color:var(--violet);font-weight:800;border-radius:999px;padding:3px 14px;font-size:15px}
+.lr-tag.try{background:var(--s-green);color:var(--green)}
+.lr-body{font-size:22px;line-height:1.55;font-weight:600}
+.lr-vis{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;align-items:flex-start}
+.lr-foot{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-top:14px}
+.lr-fb{flex:1;padding:12px 16px;border-radius:14px;border:2.5px solid var(--line);font-size:18px}
+.lr-fb.ok{background:var(--s-green)}.lr-fb.no{background:var(--s-red)}
+.gnote{width:100%;text-align:center;font-weight:700;color:var(--muted);font-size:16px}
+.gchips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.gchips span{border:2.5px solid var(--line);border-radius:14px;padding:8px 14px;background:var(--s-yellow);font-size:20px;font-weight:800}
+.gchips small{font-weight:600;color:var(--muted);font-size:14px}
+.gtbl{display:grid;gap:6px 22px;font-size:20px;font-weight:800;padding:12px 18px;border:2.5px solid var(--line);border-radius:16px;background:var(--card);font-variant-numeric:tabular-nums}
+.gfig{display:flex;flex-direction:column;align-items:center;gap:2px;border:2px solid var(--line);border-radius:14px;padding:8px;background:var(--card)}
+.gfig small{color:var(--muted)}
+.gsol{font-size:20px;line-height:1.7;border-left:5px solid var(--blue);padding-left:14px;background:var(--s-blue);border-radius:0 12px 12px 0}
+.g-ten{fill:#4F7CFF;stroke:#1C2142;stroke-width:1.5}.g-one{fill:#FF5A70;stroke:#1C2142;stroke-width:1.5}.g-ln{stroke:#1C2142;stroke-width:.6;opacity:.5}
+@media (max-width:520px){.lr-card{padding:16px}.lr-card h2{font-size:24px}.lr-body{font-size:19px}.gtbl{font-size:16px;gap:4px 12px}.gchips span{font-size:17px}}
 </style>
 </head><body>
 <header class="top" id="top"></header><main class="wrap" id="main"></main>
@@ -2029,7 +2054,7 @@ const curProf=()=>PROF.list.find(x=>x.id===PROF.cur)||PROF.list[0];
 function HK(){return 'hist_'+PROF.cur}
 // chuyển lịch sử cũ sang hồ sơ đầu tiên
 (function(){const old=store.get('history',null);if(old&&old.length&&!store.get('hist_p1',null)){store.set('hist_p1',old)}saveProf();const cp=curProf();P.name=cp.name;P.av=cp.av})();
-const PD0=()=>({stars:0,streak:0,best:0,last:'',days:{},lessons:{},pet:{name:'Gà Bông',fed:0},badges:[],games:0,acts:0,perfect:0});
+const PD0=()=>({seen:[],stars:0,streak:0,best:0,last:'',days:{},lessons:{},pet:{name:'Gà Bông',fed:0},badges:[],games:0,acts:0,perfect:0});
 function PD(){return Object.assign(PD0(),store.get('pd_'+PROF.cur,{}))}
 const savePD=d=>store.set('pd_'+PROF.cur,d);
 const today=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
@@ -2114,7 +2139,7 @@ function header(){
   $$('#nav button').forEach(b=>b.onclick=()=>go(b.dataset.v));
 }
 const _go=go;
-go=function(view,...a){const map={history:'parent',review:'review'};CURV=['home','path','setup','games','badges','parent'].includes(view)?view:(['gsetup','play'].includes(view)?'games':['exam','result','review'].includes(view)?CURV:CURV);_go(map[view]||view,...a);header()};
+go=function(view,...a){const map={history:'parent',review:'review'};if(view==='learn')CURV='path';else CURV=['home','path','setup','games','badges','parent'].includes(view)?view:(['gsetup','play'].includes(view)?'games':['exam','result','review'].includes(view)?CURV:CURV);_go(map[view]||view,...a);header()};
 function profileModal(){
   const draw=()=>{const o=modal(`<div class="pk-h"><h3>Ai đang học?</h3><button class="ibtn" id="px">✕</button></div>
     <div class="plist">${PROF.list.map(p=>`<button class="pitem ${p.id===PROF.cur?'on':''}" data-id="${p.id}"><img src="${IMG[(p.av==='b'?'b_':'g_')+'wave']}" alt=""><b>${esc(p.name||'Bé')}</b><small>⭐ ${Object.assign(PD0(),store.get('pd_'+p.id,{})).stars}</small></button>`).join('')}</div>
@@ -2158,7 +2183,7 @@ VIEWS.home=()=>{
     <button class="act violet" id="a4"><i>📝</i><span><b>Luyện tập tự chọn</b><small>Chọn bài, số câu, thời gian</small></span></button>
     <button class="act red" id="a5"><i>🎮</i><span><b>Trò chơi</b><small>Triệu phú, Rung chuông vàng, Đua xe…</small></span></button>
   </section>`;
-  if($('#a1'))$('#a1').onclick=()=>startLesson(nl);
+  if($('#a1'))$('#a1').onclick=()=>(PD().seen||[]).includes(nl)?startLesson(nl):go('learn',nl);
   if($('#a2'))$('#a2').onclick=()=>startExam(weak.slice(0,6),P.types,10,0);
   $('#a3').onclick=()=>go('path');$('#a4').onclick=()=>go('setup');$('#a5').onclick=()=>go('games');
   $('#rn').onclick=()=>{const o=modal(`<h3>Đặt tên cho thú cưng</h3><input class="inp big" id="pn" value="${esc(d.pet.name)}" style="max-width:none"><div class="row"><button class="btn" id="c">Huỷ</button><button class="btn primary" id="k">Lưu</button></div>`);$('#c',o).onclick=closeModal;$('#k',o).onclick=()=>{const v=$('#pn',o).value.trim();if(v){const dd=PD();dd.pet.name=v.slice(0,20);savePD(dd)}go('home')}};
@@ -2177,8 +2202,8 @@ VIEWS.path=()=>{
     const m=modal(`<div class="pk-h"><h3>Bài ${id}</h3><button class="ibtn" id="x">✕</button></div><p style="margin:0;font-size:19px;font-weight:700">${esc(LBY[id].name)}</p>
       <p class="muted" style="margin:0">${o?`Điểm cao nhất: ${Math.round(o.best*100)}% · ${'★'.repeat(o.stars)}${'☆'.repeat(3-o.stars)} · đã học ${o.n} lần`:'Con chưa học bài này.'}</p>
       <div class="muted" style="font-size:14px">★ đúng từ 50% · ★★ từ 80% · ★★★ đúng hết</div>
-      <button class="btn primary big" id="st">▶ Học bài này (10 câu)</button>`);
-    $('#x',m).onclick=closeModal;$('#st',m).onclick=()=>startLesson(id)});
+      <button class="btn green big" id="gd">📖 Học bài (xem hướng dẫn rồi làm)</button><button class="btn primary" id="st">▶ Làm bài luôn (10 câu)</button>`);
+    $('#x',m).onclick=closeModal;$('#st',m).onclick=()=>startLesson(id);$('#gd',m).onclick=()=>go('learn',id)});
   const cur=$('.node.cur');if(cur)later(()=>cur.scrollIntoView({block:'center',behavior:'smooth'}),200);
 };
 
@@ -2210,5 +2235,126 @@ VIEWS.parent=()=>{
 
 /* ---------- Khởi động ---------- */
 header();go('home');
+
+/* ================= HƯỚNG DẪN KIẾN THỨC THEO SGK (thẻ học kiểu Duolingo) ================= */
+function colDone(a,op,b,r,note){
+  const w=Math.max(String(a).length,String(b).length,String(r).length)+1;const pad=s=>String(s).padStart(w,' ').replace(/ /g,'&nbsp;');
+  return `<div class="col-calc"><div>${pad(a)}</div><div><span class="op">${op}</span>${pad(b).slice(6)}</div><div class="cbar"></div><div class="qm" style="color:var(--green)">${pad(r)}</div></div>${note?`<div class="gnote">${note}</div>`:''}`;
+}
+function tensPic(n){const t=Math.floor(n/10),u=n%10;let g='',x=0;
+  for(let i=0;i<t;i++){g+=`<rect x="${x}" y="0" width="12" height="70" rx="3" class="g-ten"/>`;for(let k=1;k<10;k++)g+=`<line x1="${x}" y1="${k*7}" x2="${x+12}" y2="${k*7}" class="g-ln"/>`;x+=17}
+  x+=8;for(let i=0;i<u;i++){g+=`<rect x="${x+(i%2)*15}" y="${56-Math.floor(i/2)*15}" width="12" height="12" rx="2" class="g-one"/>`}x+=u?32:0;
+  return `<svg viewBox="0 0 ${x+4} 72" width="${Math.min(x+4,320)}" style="max-width:100%;height:auto">${g}</svg>`}
+function tbl(rows,cols=2){return `<div class="gtbl" style="grid-template-columns:repeat(${cols},auto)">${rows.map(r=>`<span>${r}</span>`).join('')}</div>`}
+function chips(arr){return `<div class="gchips">${arr.map(x=>`<span>${x}</span>`).join('')}</div>`}
+const K=(t,h,v,tag)=>({t,h,v:v||'',tag:tag||'Kiến thức'});
+const VD=(t,h,v)=>K(t,h,v,'Ví dụ');
+const MEO=(t,h,v)=>K(t,h,v,'Mẹo nhớ');
+const GUIDE={
+1:[K('Số có hai chữ số','Số <b>57</b> gồm <b>5 chục</b> và <b>7 đơn vị</b>.<br>Đọc là: <i>năm mươi bảy</i>.',tensPic(57)+'<div class="gnote">Mỗi thanh dài là 1 chục, mỗi ô vuông là 1 đơn vị</div>'),
+   K('So sánh hai số','So sánh <b>hàng chục</b> trước. Nếu hàng chục bằng nhau thì so sánh <b>hàng đơn vị</b>.',chips(['45 &lt; 54 <small>(4 chục &lt; 5 chục)</small>','67 &gt; 63 <small>(7 đơn vị &gt; 3 đơn vị)</small>'])),
+   MEO('Dấu &gt; và &lt;','Đầu nhọn của dấu luôn chỉ vào <b>số bé hơn</b>, miệng mở về phía <b>số lớn hơn</b>.',chips(['9 &gt; 2','2 &lt; 9']))],
+2:[K('Tia số','Trên tia số, số đứng sau <b>lớn hơn</b> số đứng trước. Hai vạch liền nhau hơn kém nhau 1 đơn vị.',lineSvg([20,21,22,23,24,25,26],-1)),
+   K('Số liền trước, liền sau','Số liền sau: <b>thêm 1</b>. Số liền trước: <b>bớt 1</b>.',chips(['Liền trước của 40 là <b>39</b>','Liền sau của 39 là <b>40</b>']))],
+3:[K('Phép cộng','<b>23 + 15 = 38</b><br>23 và 15 là <b>số hạng</b>, 38 là <b>tổng</b>.',chips(['23 → số hạng','15 → số hạng','38 → tổng'])),
+   K('Phép trừ','<b>38 − 15 = 23</b><br>38 là <b>số bị trừ</b>, 15 là <b>số trừ</b>, 23 là <b>hiệu</b>.',chips(['38 → số bị trừ','15 → số trừ','23 → hiệu']))],
+4:[K('Hơn, kém nhau bao nhiêu','Muốn biết số lớn <b>hơn</b> số bé bao nhiêu (hay số bé <b>kém</b> số lớn bao nhiêu), ta lấy <b>số lớn trừ số bé</b>.',barPic({t:'cmp',a:8,b:5,n1:'Số lớn',n2:'Số bé',e:'🍎'})),
+   VD('Ví dụ','Mai 7 tuổi, bố 35 tuổi.<br>Bố hơn Mai: <b>35 − 7 = 28</b> (tuổi).')],
+5:[K('Đặt tính rồi tính','Viết các số <b>thẳng cột</b>: chục thẳng chục, đơn vị thẳng đơn vị. Tính <b>từ phải sang trái</b>.',colDone(45,'+',23,68,'5 + 3 = 8, viết 8 · 4 + 2 = 6, viết 6')),
+   VD('Phép trừ',"68 − 25",colDone(68,'−',25,43,'8 − 5 = 3, viết 3 · 6 − 2 = 4, viết 4')),
+   MEO('Số tròn chục','<b>40 + 30 = 70</b> vì 4 chục + 3 chục = 7 chục.')],
+7:[K('Cộng qua 10: làm tròn 10','<b>9 + 5 = ?</b><br>Tách 5 thành 1 và 4.<br>9 + 1 = 10, rồi 10 + 4 = <b>14</b>.',countPic([{lab:'9',n:9,e:'🍎'},{lab:'5 = 1 + 4',n:5,e:'🍊'}])),
+   VD('Thử thêm một phép','<b>8 + 6 = ?</b><br>Tách 6 = 2 + 4. 8 + 2 = 10, 10 + 4 = <b>14</b>.')],
+8:[K('Bảng cộng qua 10','Học thuộc các phép cộng có tổng lớn hơn 10:',tbl(['9 + 2 = 11','8 + 3 = 11','9 + 3 = 12','8 + 4 = 12','9 + 4 = 13','8 + 5 = 13','9 + 5 = 14','7 + 7 = 14','9 + 6 = 15','8 + 7 = 15','9 + 7 = 16','8 + 8 = 16','9 + 8 = 17','9 + 9 = 18'],2)),
+   MEO('Đổi chỗ số hạng','Đổi chỗ các số hạng thì tổng <b>không đổi</b>:<br><b>6 + 9 = 9 + 6 = 15</b>.')],
+9:[K('Bài toán về thêm','Có một số, <b>thêm</b> vào (cho thêm, mua thêm…) → làm <b>phép cộng</b>.',countPic([{lab:'Có',n:6,e:'🐔'},{lab:'Thêm',n:3,e:'🐔'}])+'<div class="gnote">6 + 3 = 9 (con gà)</div>'),
+   K('Bài toán về bớt','Có một số, <b>bớt</b> đi (bay đi, cho đi, ăn mất…) → làm <b>phép trừ</b>.',countPic([{lab:'Có',n:8,e:'🐦',x:3}])+'<div class="gnote">8 − 3 = 5 (con chim)</div>'),
+   K('Trình bày bài giải','<div class="gsol">Bài giải<br>Số con gà có tất cả là:<br>6 + 3 = 9 (con)<br>Đáp số: 9 con gà.</div>')],
+11:[K('Trừ qua 10','<b>12 − 3 = ?</b><br>Tách 3 thành 2 và 1.<br>12 − 2 = 10, rồi 10 − 1 = <b>9</b>.',countPic([{lab:'12',n:12,e:'🍬',x:3}])),
+   VD('Thử thêm một phép','<b>15 − 7 = ?</b><br>Tách 7 = 5 + 2. 15 − 5 = 10, 10 − 2 = <b>8</b>.')],
+12:[K('Bảng trừ qua 10','Dùng bảng cộng để làm phép trừ:<br>Vì <b>8 + 5 = 13</b> nên <b>13 − 5 = 8</b> và <b>13 − 8 = 5</b>.'),
+    K('Một số phép trừ cần nhớ','',tbl(['11 − 2 = 9','12 − 3 = 9','13 − 4 = 9','14 − 5 = 9','15 − 6 = 9','16 − 7 = 9','17 − 8 = 9','18 − 9 = 9','11 − 5 = 6','12 − 6 = 6','13 − 7 = 6','14 − 8 = 6'],2))],
+13:[K('Nhiều hơn → phép cộng','Lan có 6 quả cam, Hà có <b>nhiều hơn</b> Lan 3 quả.<br>Hà có: <b>6 + 3 = 9</b> (quả).',barPic({t:'more',a:6,b:3,n1:'Lan',n2:'Hà',e:'🍊',u:'quả'})),
+    K('Ít hơn → phép trừ','Đàn gà có 9 con, đàn vịt <b>ít hơn</b> đàn gà 4 con.<br>Đàn vịt có: <b>9 − 4 = 5</b> (con).',barPic({t:'less',a:9,b:4,n1:'Gà',n2:'Vịt',e:'🐔',e2:'🦆',u:'con'}))],
+15:[K('Ki-lô-gam','<b>Ki-lô-gam</b> là đơn vị đo <b>độ nặng</b>, viết tắt là <b>kg</b>. Muốn biết vật nặng bao nhiêu, ta dùng <b>cái cân</b>.',balanceSvg('🍉',[2,1])+'<div class="gnote">Cân thăng bằng: quả dưa nặng 2 kg + 1 kg = 3 kg</div>'),
+    K('Tính với kg','Cộng, trừ như số bình thường rồi <b>viết kg</b> sau kết quả.',chips(['5 kg + 3 kg = 8 kg','10 kg − 4 kg = 6 kg'])),
+    MEO('Nặng hơn, nhẹ hơn','Trên cân đĩa, bên nào <b>thấp xuống</b> là bên <b>nặng hơn</b>.',seesawSvg('🐘','🐭'))],
+16:[K('Lít','<b>Lít</b> là đơn vị đo lượng chất lỏng (nước, sữa, dầu…), viết tắt là <b>l</b>.',chips(['🥛 ca 1 l','🛢️ can 5 l','🪣 thùng 10 l'])),
+    K('Tính với lít','<b>7 l + 2 l = 9 l</b><br><b>10 l − 3 l = 7 l</b>'),
+    VD('Rót nước','Rót đầy 4 ca 1 l thì vừa hết nước trong bình → bình chứa <b>4 l</b>.',countPic([{lab:'',n:4,e:'🥛'}]))],
+17:[K('Ước lượng cân nặng','Quả dưa hấu nặng khoảng <b>3 kg</b>. Bao gạo nặng khoảng <b>10 kg</b>.'),K('Ước lượng lít','Một can nước nhỏ chứa khoảng <b>5 l</b>. Chai nước nhỏ chứa ít hơn 1 l.')],
+19:[K('Cộng có nhớ','<b>37 + 5</b>',colDone(37,'+',5,42,'7 + 5 = 12, viết 2 nhớ 1 · 3 thêm 1 bằng 4, viết 4')),MEO('Nhớ 1','Khi cộng hàng đơn vị được từ 10 trở lên, ta <b>nhớ 1</b> sang hàng chục.')],
+20:[K('Cộng có nhớ hai chữ số','<b>38 + 27</b>',colDone(38,'+',27,65,'8 + 7 = 15, viết 5 nhớ 1 · 3 + 2 = 5, thêm 1 bằng 6, viết 6'))],
+22:[K('Trừ có nhớ','<b>42 − 7</b>',colDone(42,'−',7,35,'2 không trừ được 7, lấy 12 − 7 = 5, viết 5 nhớ 1 · 4 − 1 = 3, viết 3')),MEO('Mượn 1 chục','Hàng đơn vị không trừ được thì <b>mượn 1 chục</b> (thêm 10), rồi nhớ trả 1 ở hàng chục.')],
+23:[K('Trừ có nhớ hai chữ số','<b>72 − 38</b>',colDone(72,'−',38,34,'2 không trừ được 8, lấy 12 − 8 = 4, viết 4 nhớ 1 · 3 thêm 1 bằng 4, 7 − 4 = 3, viết 3'))],
+25:[K('Đoạn thẳng, đường thẳng, đường cong','',`<div class="gfig">${SH.doanThang()}<b>Đoạn thẳng</b><small>có 2 điểm đầu mút</small></div><div class="gfig">${SH.duongThang()}<b>Đường thẳng</b><small>kéo dài mãi 2 phía</small></div><div class="gfig">${SH.duongCong()}<b>Đường cong</b></div>`),
+    K('Ba điểm thẳng hàng','Ba điểm <b>cùng nằm trên một đường thẳng</b> gọi là ba điểm thẳng hàng. Dùng <b>thước</b> để kiểm tra.',svgWrap(220,60,`<line x1="10" y1="40" x2="210" y2="20" class="ln"/><circle cx="30" cy="38" r="5" class="dot"/><circle cx="110" cy="30" r="5" class="dot"/><circle cx="190" cy="22" r="5" class="dot"/><text x="30" y="58" text-anchor="middle" class="tx b">A</text><text x="110" y="50" text-anchor="middle" class="tx b">B</text><text x="190" y="42" text-anchor="middle" class="tx b">C</text>`))],
+26:[K('Đường gấp khúc','Đường gấp khúc gồm nhiều đoạn thẳng nối tiếp nhau. <b>Độ dài</b> đường gấp khúc = <b>tổng</b> độ dài các đoạn.',chips(['AB = 3 cm','BC = 4 cm','CD = 5 cm'])+'<div class="gnote">Độ dài ABCD: 3 + 4 + 5 = 12 (cm)</div>'),
+    K('Hình tứ giác','Hình tứ giác có <b>4 cạnh</b> và <b>4 đỉnh</b>.',`<div class="shape-row">${polySvg('15,20 105,20 105,85 15,85')}${polySvg('30,15 95,15 110,85 15,85')}${polySvg('20,30 90,10 110,80 35,90')}</div>`)],
+27:[K('Vẽ đoạn thẳng','Đặt <b>vạch 0</b> của thước trùng điểm đầu, chấm điểm ở vạch số cm cần vẽ, rồi nối hai điểm.',rulerSvg(0,6)+'<div class="gnote">Đoạn thẳng AB dài 6 cm</div>'),
+    K('Gấp, ghép hình','Ghép 2 hình tam giác giống nhau có thể được <b>hình tứ giác</b>.')],
+29:[K('Ngày và giờ','Một ngày có <b>24 giờ</b>.',tbl(['🌅 Sáng','1 – 10 giờ','🌞 Trưa','11 – 12 giờ','🌇 Chiều','13 – 18 giờ','🌙 Tối','19 – 21 giờ','🌃 Đêm','22 – 24 giờ'],2)),
+    K('Xem đồng hồ','<b>Kim ngắn</b> chỉ giờ, <b>kim dài</b> chỉ phút. 1 giờ = <b>60 phút</b>.',clockSvg(8,0)+'<div class="gnote">Đồng hồ chỉ 8 giờ</div>'),
+    VD('Giờ rưỡi, giờ kém','',`<div class="gfig">${clockSvg(8,30)}<b>8 giờ 30 phút</b><small>(8 giờ rưỡi)</small></div><div class="gfig">${clockSvg(8,15)}<b>8 giờ 15 phút</b></div>`),
+    MEO('Giờ buổi chiều','<b>15 giờ</b> còn gọi là <b>3 giờ chiều</b> (lấy 15 − 12 = 3).')],
+30:[K('Xem lịch','Tờ lịch cho biết <b>ngày, tháng, thứ</b>.',calendarHtml(2026,11)),
+    MEO('Số ngày trong tháng','Tháng có 31 ngày: 1, 3, 5, 7, 8, 10, 12.<br>Tháng có 30 ngày: 4, 6, 9, 11.<br>Tháng 2 có 28 hoặc 29 ngày.'),
+    K('Một tuần lễ','Một tuần có <b>7 ngày</b>. Thứ Hai tuần này là ngày 9 thì thứ Hai tuần sau là ngày <b>16</b> (9 + 7).')],
+31:[K('Đọc phút','Kim dài chỉ số 1 là <b>5 phút</b>, số 2 là <b>10 phút</b>… Mỗi số cách nhau 5 phút.',clockSvg(9,20)+'<div class="gnote">9 giờ 20 phút</div>')],
+37:[K('Phép nhân','2 + 2 + 2 = 6<br><b>2 được lấy 3 lần</b>, ta viết <b>2 × 3 = 6</b>.<br>Đọc là: hai nhân ba bằng sáu.',groupsHtml(3,2,'🍊')),MEO('Dấu nhân','Dấu <b>×</b> là dấu nhân.')],
+38:[K('Thừa số, tích','<b>2 × 5 = 10</b><br>2 và 5 là <b>thừa số</b>, 10 là <b>tích</b>.',chips(['2 → thừa số','5 → thừa số','10 → tích']))],
+39:[K('Bảng nhân 2','',tbl(['2 × 1 = 2','2 × 6 = 12','2 × 2 = 4','2 × 7 = 14','2 × 3 = 6','2 × 8 = 16','2 × 4 = 8','2 × 9 = 18','2 × 5 = 10','2 × 10 = 20'],2)),MEO('Đếm thêm 2','2, 4, 6, 8, 10, 12, 14, 16, 18, 20')],
+40:[K('Bảng nhân 5','',tbl(['5 × 1 = 5','5 × 6 = 30','5 × 2 = 10','5 × 7 = 35','5 × 3 = 15','5 × 8 = 40','5 × 4 = 20','5 × 9 = 45','5 × 5 = 25','5 × 10 = 50'],2)),MEO('Đếm thêm 5','5, 10, 15, 20, 25, 30, 35, 40, 45, 50')],
+41:[K('Phép chia','Có 6 quả cam <b>chia đều</b> vào 2 đĩa, mỗi đĩa 3 quả.<br>Ta viết <b>6 : 2 = 3</b>.',groupsHtml(2,3,'🍊')),
+    K('Từ phép nhân đến phép chia','<b>2 × 3 = 6</b><br>→ <b>6 : 2 = 3</b> và <b>6 : 3 = 2</b>.')],
+42:[K('Số bị chia, số chia, thương','<b>10 : 2 = 5</b><br>10 là <b>số bị chia</b>, 2 là <b>số chia</b>, 5 là <b>thương</b>.',chips(['10 → số bị chia','2 → số chia','5 → thương']))],
+43:[K('Bảng chia 2','',tbl(['2 : 2 = 1','12 : 2 = 6','4 : 2 = 2','14 : 2 = 7','6 : 2 = 3','16 : 2 = 8','8 : 2 = 4','18 : 2 = 9','10 : 2 = 5','20 : 2 = 10'],2)),MEO('Dùng bảng nhân','Vì 2 × 7 = 14 nên 14 : 2 = 7.')],
+44:[K('Bảng chia 5','',tbl(['5 : 5 = 1','30 : 5 = 6','10 : 5 = 2','35 : 5 = 7','15 : 5 = 3','40 : 5 = 8','20 : 5 = 4','45 : 5 = 9','25 : 5 = 5','50 : 5 = 10'],2)),MEO('Dùng bảng nhân','Vì 5 × 8 = 40 nên 40 : 5 = 8.')],
+46:[K('Khối cầu','Khối cầu <b>tròn đều</b> mọi phía, lăn được về mọi hướng.',chips(['⚽ quả bóng','🍊 quả cam','🌏 quả địa cầu'])),
+    K('Khối trụ','Khối trụ có <b>hai mặt đáy là hình tròn</b>, đứng được và lăn được.',chips(['🥫 lon sữa','🥁 cái trống','🕯️ cây nến']))],
+48:[K('Đơn vị, chục, trăm, nghìn','',tbl(['10 đơn vị','= 1 chục','10 chục','= 1 trăm','10 trăm','= 1 nghìn'],2)),VD('Ví dụ','3 chục = 30 · 4 trăm = 400 · 1 nghìn viết là 1 000')],
+49:[K('Số tròn trăm, tròn chục','Số <b>tròn trăm</b> có hai chữ số 0 ở cuối: 100, 200, …, 900.<br>Số <b>tròn chục</b> có chữ số 0 ở cuối: 110, 120, 350…')],
+50:[K('So sánh số tròn trăm','<b>300 &lt; 500</b> vì 3 trăm &lt; 5 trăm.<br><b>240 &gt; 210</b> vì 4 chục &gt; 1 chục.')],
+51:[K('Số có ba chữ số','Số <b>345</b> gồm <b>3 trăm, 4 chục, 5 đơn vị</b>.<br>Đọc là: <i>ba trăm bốn mươi lăm</i>.'),
+    MEO('Cách đọc đặc biệt',tbl(['105','một trăm <b>linh</b> năm','115','một trăm mười <b>lăm</b>','121','một trăm hai mươi <b>mốt</b>','124','một trăm hai mươi <b>tư</b>'],2))],
+52:[K('Viết số thành tổng','<b>345 = 300 + 40 + 5</b>',chips(['3 trăm → 300','4 chục → 40','5 đơn vị → 5']))],
+53:[K('So sánh số có ba chữ số','So sánh <b>hàng trăm</b> trước, rồi <b>hàng chục</b>, rồi <b>hàng đơn vị</b>.',chips(['528 &gt; 497 <small>(5 trăm &gt; 4 trăm)</small>','365 &lt; 372 <small>(6 chục &lt; 7 chục)</small>']))],
+55:[K('Đề-xi-mét, mét, ki-lô-mét','',tbl(['1 dm','= 10 cm','1 m','= 10 dm = 100 cm','1 km','= 1 000 m'],2)),VD('Thước 1 dm','Đoạn từ vạch 0 đến vạch 10 trên thước dài 10 cm = 1 dm.',rulerSvg(0,10))],
+56:[K('Tiền Việt Nam','',`<div class="notes">${noteHtml(100)}${noteHtml(200)}${noteHtml(500)}${noteHtml(1000)}</div>`),K('Đổi tiền','1 000 đồng = 2 tờ 500 đồng = 5 tờ 200 đồng = 10 tờ 100 đồng.')],
+57:[K('Chọn đơn vị đo','',tbl(['✏️ Bút chì','khoảng 15 cm','✋ Gang tay','khoảng 1 dm','🪑 Bàn học','khoảng 1 m','🛣️ Đường về quê','khoảng … km'],2))],
+59:[K('Cộng không nhớ (phạm vi 1 000)','Cộng lần lượt từ phải sang trái: <b>đơn vị → chục → trăm</b>.',colDone(352,'+',214,566))],
+60:[K('Cộng có nhớ (phạm vi 1 000)','<b>465 + 218</b>',colDone(465,'+',218,683,'5 + 8 = 13, viết 3 nhớ 1 · 6 + 1 = 7, thêm 1 bằng 8 · 4 + 2 = 6'))],
+61:[K('Trừ không nhớ (phạm vi 1 000)','Trừ lần lượt từ phải sang trái.',colDone(586,'−',253,333))],
+62:[K('Trừ có nhớ (phạm vi 1 000)','<b>652 − 318</b>',colDone(652,'−',318,334,'2 không trừ được 8, lấy 12 − 8 = 4, nhớ 1 · 1 thêm 1 bằng 2, 5 − 2 = 3 · 6 − 3 = 3'))],
+64:[K('Kiểm đếm','Đếm <b>từng loại</b> một. Đếm xong cái nào thì đánh dấu cái đó để không bị sót hoặc đếm hai lần.',countPic([{lab:'Táo',n:5,e:'🍎'},{lab:'Cam',n:3,e:'🍊'}]))],
+65:[K('Biểu đồ tranh','Mỗi hình ứng với <b>1 đồ vật</b>. Đếm số hình ở mỗi hàng để biết số lượng; hàng dài nhất là loại nhiều nhất.',`<div class="pict"><div class="pict-h">BIỂU ĐỒ TRANH</div><div class="pr"><b>quả táo</b><span>🍎🍎🍎🍎🍎</span></div><div class="pr"><b>quả cam</b><span>🍊🍊🍊</span></div><div class="pict-n">Mỗi hình ứng với 1 quả</div></div>`)],
+66:[K('Chắc chắn, có thể, không thể','',tbl(['<b>Chắc chắn</b>','luôn xảy ra','<b>Có thể</b>','lúc có lúc không','<b>Không thể</b>','không bao giờ xảy ra'],2)),
+    VD('Hộp bi','Hộp chỉ có bi đỏ 🔴🔴🔴. Lấy 1 viên:<br><b>chắc chắn</b> được bi đỏ, <b>không thể</b> được bi xanh.')],
+};
+function guideCards(id){
+  let cards=GUIDE[id];
+  if(!cards){const l=LBY[id];const refs=(l.mix||[]).flatMap(m=>GUIDE[m]?[m]:(LBY[m].mix||[])).filter(m=>GUIDE[m]);const u=[...new Set(refs)].slice(0,4);
+    cards=[K('Cùng nhớ lại',`Bài này ôn lại ${u.map(x=>'<b>Bài '+x+'</b>').join(', ')}. Mình xem nhanh kiến thức chính nhé!`,'','Ôn tập'),...u.map(m=>Object.assign({},GUIDE[m][0],{tag:'Nhớ lại · Bài '+m}))]}
+  // thêm 2 câu "Con thử làm"
+  const tries=[];for(let k=0;k<6&&tries.length<2;k++){const q=makeQuestion([id],['mc']);if(q&&!tries.some(x=>sig(x)===sig(q)))tries.push(q)}
+  return [...cards,...tries.map(q=>({tag:'Con thử làm',q}))];
+}
+VIEWS.learn=(id)=>{
+  const cards=guideCards(id);let i=0;
+  const draw=()=>{const c=cards[i];
+    main().innerHTML=`<div class="lr-top"><button class="ibtn" id="lx" aria-label="Thoát">✕</button><div class="lr-bar">${cards.map((_,k)=>`<i class="${k<i?'done':k===i?'cur':''}"></i>`).join('')}</div><span class="muted" style="font-weight:800">Thẻ ${i+1}/${cards.length}</span></div>
+    <div class="lr-title muted">Bài ${id}. ${esc(LBY[id].name)}</div>
+    <section class="card lr-card pop"><span class="lr-tag ${c.q?'try':''}">${c.tag}</span>${c.q?'<div id="tq"></div>':`<h2>${c.t}</h2>${c.h?`<div class="lr-body">${c.h}</div>`:''}${c.v?`<div class="lr-vis">${c.v}</div>`:''}`}</section>
+    <div class="lr-foot" id="lf">${c.q?'':`${i>0?'<button class="btn" id="lb">← Quay lại</button>':'<span></span>'}<button class="btn green big" id="ln">${i===cards.length-1?'Bắt đầu luyện tập ▶':'Tiếp tục →'}</button>`}</div>`;
+    $('#lx').onclick=()=>go('path');
+    if(c.q){const host=$('#tq');const q=c.q;q.r=null;
+      const fin=()=>{const ok=check(q);host._q=q;renderQ(q,host,{review:true,head:false});ok?SND.ok():SND.no();
+        $('#lf').innerHTML=`<div class="lr-fb ${ok?'ok':'no'}"><b>${ok?'🎉 Đúng rồi!':'💡 Chưa đúng, con xem đáp án nhé.'}</b></div><button class="btn green big" id="ln">${i===cards.length-1?'Bắt đầu luyện tập ▶':'Tiếp tục →'}</button>`;$('#ln').onclick=next};
+      renderQ(q,host,{head:false,autoMc:true,onLock:fin,footer:''});
+    }else{$('#ln').onclick=next;if($('#lb'))$('#lb').onclick=()=>{i--;draw()}}
+  };
+  const next=()=>{if(i<cards.length-1){i++;SND.click();draw();window.scrollTo(0,0)}else{const d=PD();d.seen=d.seen||[];if(!d.seen.includes(id))d.seen.push(id);savePD(d);startLesson(id)}};
+  draw();
+};
 </script>
 </body></html>
