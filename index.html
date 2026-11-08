@@ -584,8 +584,8 @@ svg .tx.bm-qt{font:800 16px var(--display);fill:#7356E0;stroke:#fff}
 .wb{width:70%;max-width:44px;background:var(--green);border:2px solid var(--line);border-radius:8px 8px 2px 2px}
 .mrow{display:flex;gap:10px;align-items:flex-start;flex-wrap:wrap}.mrow>span{min-width:130px;font-size:15px}
 .mcells{display:flex;flex-wrap:wrap;gap:4px}
-.mc{width:34px;height:30px;border-radius:8px;border:2px solid var(--line);display:grid;place-items:center;font-size:12px;font-weight:800;background:var(--card);font-variant-numeric:tabular-nums}
-.mc.m0{background:#FFB3BF}.mc.m1{background:#C9F0D6}.mc.m2{background:#7FD99E}.mc.m3{background:#2DB45D;color:#fff}
+.mcl{width:34px;height:30px;border-radius:8px;border:2px solid var(--line);display:grid;place-items:center;font-size:12px;font-weight:800;background:var(--card);font-variant-numeric:tabular-nums}
+.mcl.m0{background:#FFB3BF}.mcl.m1{background:#C9F0D6}.mcl.m2{background:#7FD99E}.mcl.m3{background:#2DB45D;color:#fff}
 .nodes{gap:20px}
 .nd{max-width:200px}
 .node.cur{margin-top:26px}
@@ -2200,7 +2200,7 @@ VIEWS.parent=()=>{
   <div class="card kpi"><small>Bài đã có sao</small><b>${doneCount(d)}/75</b><span class="muted">${Object.values(d.lessons).filter(x=>x.stars>=3).length} bài 3 sao</span></div><div class="card kpi"><small>Điểm TB 10 lần gần nhất</small><b>${avg}</b><span class="muted">${H.length} lần luyện tập</span></div></div>
   <section class="card panel"><h3 style="font-size:22px">7 ngày qua</h3><div class="week">${last7.map(([t,n])=>`<div><span class="wb" style="height:${Math.min(100,n*25)+6}px"></span><b>${n}</b><small>${t}</small></div>`).join('')}</div></section>
   <section class="card panel"><h3 style="font-size:22px">Mức độ thành thạo từng bài</h3><div class="muted" style="font-size:14px">Ô càng đậm màu xanh là bài con làm càng tốt. Ô trắng là bài chưa học, ô đỏ là bài chưa vững (dưới 50%).</div>
-    ${CD.map(c=>`<div class="mrow"><span>${CDPIC[c.id]} <b>Chủ đề ${c.id}</b></span><div class="mcells">${L.filter(l=>l.cd===c.id).map(l=>{const o=d.lessons[l.id];const cl=!o?'':o.best<.5?'m0':'m'+o.stars;return `<span class="mc ${cl}" title="Bài ${l.id}. ${esc(l.name)}${o?' – '+Math.round(o.best*100)+'%':''}">${l.id}</span>`}).join('')}</div></div>`).join('')}
+    ${CD.map(c=>`<div class="mrow"><span>${CDPIC[c.id]} <b>Chủ đề ${c.id}</b></span><div class="mcells">${L.filter(l=>l.cd===c.id).map(l=>{const o=d.lessons[l.id];const cl=!o?'':o.best<.5?'m0':'m'+o.stars;return `<span class="mcl ${cl}" title="Bài ${l.id}. ${esc(l.name)}${o?' – '+Math.round(o.best*100)+'%':''}">${l.id}</span>`}).join('')}</div></div>`).join('')}
     ${weakLessons().length?`<div class="advice"><b>Bài cần ôn thêm:</b> ${weakLessons().map(id=>`Bài ${id} (${esc(LBY[id].name)})`).join('; ')}</div>`:''}</section>
   <section class="card panel hist"><h3 style="font-size:22px">Lịch sử luyện tập</h3>
   ${H.length?`<div style="overflow-x:auto"><table class="tbl"><thead><tr><th>Thời gian</th><th>Điểm</th><th>Đúng</th><th>Bài</th><th>Cần ôn</th></tr></thead><tbody>${H.map(h=>`<tr><td>${esc(h.date)}</td><td class="n"><b>${String(h.score).replace('.',',')}</b></td><td class="n">${h.correct}/${h.total}</td><td>${h.lessons.slice(0,8).map(x=>'B'+x).join(', ')}${h.lessons.length>8?'…':''}</td><td>${(h.weak||[]).map(x=>'B'+x).join(', ')||'—'}</td></tr>`).join('')}</tbody></table></div>`:'<div class="empty muted">Chưa có bài làm nào.</div>'}
