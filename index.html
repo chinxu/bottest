@@ -479,6 +479,16 @@ svg .tx{paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:r
 svg .tx.w{stroke:none}
 .tx.s.lab{font-size:15px;font-weight:800}
 .ck-n{paint-order:stroke;stroke:var(--card);stroke-width:4px;font-size:18px}
+/* tóm tắt bài toán bằng hình */
+.scene{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.sc-it{display:flex;flex-direction:column;align-items:center;gap:4px;min-width:110px;padding:10px 12px;border:2.5px solid var(--line);border-radius:16px;background:var(--card);box-shadow:3px 3px 0 var(--shadow)}
+.sc-ic{width:64px;height:64px;display:grid;place-items:center;font-size:48px;line-height:1}
+.sc-ic img{width:60px;height:60px;object-fit:contain}
+.sc-it b{font-size:14px;color:var(--muted)}
+.sc-v{font-family:var(--display);font-weight:800;font-size:20px}
+.sc-it.q{background:var(--s-yellow);border-style:dashed}
+.sc-it.q .sc-ic{font-family:var(--display);font-weight:800;font-size:44px;color:var(--blue)}
+@media (max-width:520px){.sc-it{min-width:92px;padding:8px}.sc-ic{width:48px;height:48px;font-size:36px}.sc-ic img{width:44px;height:44px}.sc-v{font-size:17px}}
 </style>
 </head><body>
 <header class="top" id="top"></header><main class="wrap" id="main"></main>
@@ -530,6 +540,8 @@ const NAMES=['An','Bình','Mai','Lan','Hùng','Nam','Hoa','Minh','Việt','Hà',
 const OBJ=[['quả cam','quả'],['bông hoa','bông'],['cái kẹo','cái'],['quyển vở','quyển'],['viên bi','viên'],['con gà','con'],['cái bút chì','cái'],['quả bóng','quả'],['chiếc thuyền giấy','chiếc'],['quả táo','quả'],['con cá','con'],['cái bánh','cái'],['ngôi sao giấy','ngôi sao'],['nhãn vở','nhãn vở']];
 const OBJE={'quả cam':'🍊','bông hoa':'🌸','cái kẹo':'🍬','quyển vở':'📒','viên bi':'🔵','con gà':'🐔','cái bút chì':'✏️','quả bóng':'⚽','chiếc thuyền giấy':'⛵','quả táo':'🍎','con cá':'🐟','cái bánh':'🧁','ngôi sao giấy':'⭐','nhãn vở':'🏷️'};
 const oe=o=>OBJE[o[0]]||'⭐';
+const SI=(e,lab,val)=>({e,lab,val});
+const boyg=n=>['Mai','Lan','Hoa','Hà','Mi'].includes(n)?'👧':n==='Rô-bốt'?'🤖':'👦';
 const two2=()=>{const a=shuffle(NAMES);return [a[0],a[1]]};
 const THU=['Chủ nhật','thứ Hai','thứ Ba','thứ Tư','thứ Năm','thứ Sáu','thứ Bảy'];
 
@@ -645,9 +657,9 @@ def('honkem',()=>{const [a0,b]=noBorrowPair(),a=a0;return pick([
   ()=>F(`Số ${b} bé hơn số ${a} là {_} đơn vị`,a-b),
 ])()});
 def('wHonKem',()=>{const [a,b]=noBorrowPair();const [N,M]=two2();const o=pick(OBJ);return pick([
-  ()=>F(`${N} có ${a} ${o[0]}, ${M} có ${b} ${o[0]}. Hỏi ${N} có nhiều hơn ${M} bao nhiêu ${o[0]}?`,a-b,{u:o[1],long:true}),
-  ()=>F(`${N} có ${a} ${o[0]}, ${M} có ${b} ${o[0]}. Hỏi ${M} có ít hơn ${N} bao nhiêu ${o[0]}?`,a-b,{u:o[1],long:true}),
-  ()=>{const t=R(6,9),bo=R(28,40);return F(`${N} ${t} tuổi, bố của ${N} ${bo} tuổi. Hỏi bố hơn ${N} bao nhiêu tuổi?`,bo-t,{u:'tuổi',long:true})},
+  ()=>F(`${N} có ${a} ${o[0]}, ${M} có ${b} ${o[0]}. Hỏi ${N} có nhiều hơn ${M} bao nhiêu ${o[0]}?`,a-b,{u:o[1],long:true,sc:[SI(oe(o),N,`${a} ${o[1]}`),SI(oe(o),M,`${b} ${o[1]}`),SI('❔','Hơn','?')]}),
+  ()=>F(`${N} có ${a} ${o[0]}, ${M} có ${b} ${o[0]}. Hỏi ${M} có ít hơn ${N} bao nhiêu ${o[0]}?`,a-b,{u:o[1],long:true,sc:[SI(oe(o),N,`${a} ${o[1]}`),SI(oe(o),M,`${b} ${o[1]}`),SI('❔','Ít hơn','?')]}),
+  ()=>{const t=R(6,9),bo=R(28,40);return F(`${N} ${t} tuổi, bố của ${N} ${bo} tuổi. Hỏi bố hơn ${N} bao nhiêu tuổi?`,bo-t,{u:'tuổi',long:true,sc:[SI(boyg(N),N,`${t} tuổi`),SI('👨','Bố',`${bo} tuổi`),SI('❔','Bố hơn','? tuổi')]})},
 ])()});
 /* --- Cộng trừ không nhớ ≤100 --- */
 def('add100nc',()=>{if(Math.random()<.25){const a=R(1,8)*10,b=R(1,9-a/10)*10;return F(`${a} + ${b} = {_}`,a+b,{ord:true})}
@@ -657,10 +669,10 @@ def('sub100nc',()=>{if(Math.random()<.25){const a=R(2,10)*10,b=R(1,a/10-1)*10;re
 function cmpExprGen(mk){return()=>{const [e1,v1]=mk();let e2,w2;if(Math.random()<.4){w2=Math.max(0,v1+pick([-1,0,1,-10,10,2,-2]));e2=String(w2)}else{[e2,w2]=mk()}return F(`${e1} {_} ${e2}`,sign(v1,w2),{opts:['>','<','=']})}}
 def('cmpExpr100nc',cmpExprGen(()=>{if(Math.random()<.5){const [a,b]=noCarryPair();return [`${a} + ${b}`,a+b]}const [a,b]=noBorrowPair();return [`${a} ${MI} ${b}`,a-b]}));
 function wAddSub(pairAdd,pairSub){return()=>{const [N,M]=two2();const o=pick(OBJ);return pick([
-  ()=>{const [a,b]=pairAdd();return F(`${N} có ${a} ${o[0]}, ${M} cho ${N} thêm ${b} ${o[0]}. Hỏi ${N} có tất cả bao nhiêu ${o[0]}?`,a+b,{u:o[1],long:true})},
-  ()=>{const [a,b]=pairAdd();return F(`Lớp 2A trồng được ${a} cây, lớp 2B trồng được ${b} cây. Hỏi cả hai lớp trồng được bao nhiêu cây?`,a+b,{u:'cây',long:true})},
-  ()=>{const [a,b]=pairSub();return F(`${N} có ${a} ${o[0]}, ${N} cho ${M} ${b} ${o[0]}. Hỏi ${N} còn lại bao nhiêu ${o[0]}?`,a-b,{u:o[1],long:true})},
-  ()=>{const [a,b]=pairSub();return F(`Một cửa hàng có ${a} ${o[0]}, đã bán ${b} ${o[0]}. Hỏi cửa hàng còn lại bao nhiêu ${o[0]}?`,a-b,{u:o[1],long:true})},
+  ()=>{const [a,b]=pairAdd();return F(`${N} có ${a} ${o[0]}, ${M} cho ${N} thêm ${b} ${o[0]}. Hỏi ${N} có tất cả bao nhiêu ${o[0]}?`,a+b,{u:o[1],long:true,sc:[SI(oe(o),N+' có',`${a} ${o[1]}`),SI(oe(o),M+' cho thêm',`${b} ${o[1]}`),SI('❔','Tất cả','?')]})},
+  ()=>{const [a,b]=pairAdd();return F(`Lớp 2A trồng được ${a} cây, lớp 2B trồng được ${b} cây. Hỏi cả hai lớp trồng được bao nhiêu cây?`,a+b,{u:'cây',long:true,sc:[SI('🌳','Lớp 2A',`${a} cây`),SI('🌳','Lớp 2B',`${b} cây`),SI('❔','Cả hai lớp','? cây')]})},
+  ()=>{const [a,b]=pairSub();return F(`${N} có ${a} ${o[0]}, ${N} cho ${M} ${b} ${o[0]}. Hỏi ${N} còn lại bao nhiêu ${o[0]}?`,a-b,{u:o[1],long:true,sc:[SI(oe(o),N+' có',`${a} ${o[1]}`),SI(oe(o),'Cho '+M,`${b} ${o[1]}`),SI('❔','Còn lại','?')]})},
+  ()=>{const [a,b]=pairSub();return F(`Một cửa hàng có ${a} ${o[0]}, đã bán ${b} ${o[0]}. Hỏi cửa hàng còn lại bao nhiêu ${o[0]}?`,a-b,{u:o[1],long:true,sc:[SI('🏪','Cửa hàng có',`${a} ${o[1]}`),SI(oe(o),'Đã bán',`${b} ${o[1]}`),SI('❔','Còn lại','?')]})},
 ])()}}
 def('wAddSub100nc',wAddSub(noCarryPair,noBorrowPair));
 
@@ -693,10 +705,10 @@ def('wThem20',()=>{const [a,b]=pAdd20();const [N]=two2();const o=pick(OBJ);retur
 ])()});
 def('wSub20',()=>{const [a,b]=pSub20();const o=pick(OBJ);return F(`Có ${a} ${o[0]}, đã dùng hết ${b} ${o[0]}. Hỏi còn lại bao nhiêu ${o[0]}?`,a-b,{u:o[1],long:true,cnt:[{lab:'Có',n:a,e:oe(o),x:b}]})});
 function wNhieuIt(pA,pS){return()=>{const [N,M]=two2();const o=pick(OBJ);return pick([
-  ()=>{const [a,b]=pA();return F(`${N} có ${a} ${o[0]}, ${M} có nhiều hơn ${N} ${b} ${o[0]}. Hỏi ${M} có bao nhiêu ${o[0]}?`,a+b,{u:o[1],long:true,cnt:[{lab:N,n:a,e:oe(o)},{lab:M,n:a,e:oe(o),plus:b}]})},
-  ()=>{const [a,b]=pA();return F(`Lớp 2A có ${a} bạn nữ, số bạn nam nhiều hơn số bạn nữ là ${b} bạn. Hỏi lớp 2A có bao nhiêu bạn nam?`,a+b,{u:'bạn',long:true,cnt:[{lab:'Bạn nữ',n:a,e:'👧'},{lab:'Bạn nam',n:a,e:'👦',plus:b}]})},
-  ()=>{const [a,b]=pS();return F(`${N} có ${a} ${o[0]}, ${M} có ít hơn ${N} ${b} ${o[0]}. Hỏi ${M} có bao nhiêu ${o[0]}?`,a-b,{u:o[1],long:true,cnt:[{lab:N,n:a,e:oe(o)},{lab:M,n:a,e:oe(o),x:b}]})},
-  ()=>{const [a,b]=pS();return F(`Đàn gà có ${a} con, đàn vịt ít hơn đàn gà ${b} con. Hỏi đàn vịt có bao nhiêu con?`,a-b,{u:'con',long:true,cnt:[{lab:'Đàn gà',n:a,e:'🐔'},{lab:'Đàn vịt',n:a,e:'🦆',x:b}]})},
+  ()=>{const [a,b]=pA();return F(`${N} có ${a} ${o[0]}, ${M} có nhiều hơn ${N} ${b} ${o[0]}. Hỏi ${M} có bao nhiêu ${o[0]}?`,a+b,{u:o[1],long:true,sc:[SI(oe(o),N,`${a} ${o[1]}`),SI(oe(o),M,`nhiều hơn ${b}`),SI('❔',M+' có','?')],cnt:[{lab:N,n:a,e:oe(o)},{lab:M,n:a,e:oe(o),plus:b}]})},
+  ()=>{const [a,b]=pA();return F(`Lớp 2A có ${a} bạn nữ, số bạn nam nhiều hơn số bạn nữ là ${b} bạn. Hỏi lớp 2A có bao nhiêu bạn nam?`,a+b,{u:'bạn',long:true,sc:[SI('👧','Bạn nữ',`${a} bạn`),SI('👦','Bạn nam',`nhiều hơn ${b}`),SI('❔','Bạn nam','? bạn')],cnt:[{lab:'Bạn nữ',n:a,e:'👧'},{lab:'Bạn nam',n:a,e:'👦',plus:b}]})},
+  ()=>{const [a,b]=pS();return F(`${N} có ${a} ${o[0]}, ${M} có ít hơn ${N} ${b} ${o[0]}. Hỏi ${M} có bao nhiêu ${o[0]}?`,a-b,{u:o[1],long:true,sc:[SI(oe(o),N,`${a} ${o[1]}`),SI(oe(o),M,`ít hơn ${b}`),SI('❔',M+' có','?')],cnt:[{lab:N,n:a,e:oe(o)},{lab:M,n:a,e:oe(o),x:b}]})},
+  ()=>{const [a,b]=pS();return F(`Đàn gà có ${a} con, đàn vịt ít hơn đàn gà ${b} con. Hỏi đàn vịt có bao nhiêu con?`,a-b,{u:'con',long:true,sc:[SI('🐔','Đàn gà',`${a} con`),SI('🦆','Đàn vịt',`ít hơn ${b} con`),SI('❔','Đàn vịt','? con')],cnt:[{lab:'Đàn gà',n:a,e:'🐔'},{lab:'Đàn vịt',n:a,e:'🦆',x:b}]})},
 ])()}}
 def('wNhieu20',wNhieuIt(pAdd20,pSub20));
 
@@ -712,16 +724,16 @@ def('kg',()=>{if(Math.random()<.3){const ws=shuffle([1,2,5]).slice(0,R(1,3)).sor
   if(Math.random()<.2){const p=shuffle([['🐘','con voi'],['🐭','con chuột'],['🍉','quả dưa hấu'],['🍒','quả anh đào'],['🐶','con chó'],['🦋','con bướm']]).slice(0,2);
     return F('Vật nào nặng hơn? {_}',p[0][1],{opts:[p[0][1],p[1][1]],vis:true,html:seesawSvg(p[0][0],p[1][0])})}
   return unitGen('kg')()});
-def('lit',()=>{if(Math.random()<.25){const n=R(2,9);return F(`Rót đầy nước vào ${n} ca 1 l thì vừa hết nước trong bình. Bình chứa {_}`,n,{u:'l',long:true})}return unitGen('l')()});
+def('lit',()=>{if(Math.random()<.25){const n=R(2,9);return F(`Rót đầy nước vào ${n} ca 1 l thì vừa hết nước trong bình. Bình chứa {_}`,n,{u:'l',long:true,cnt:[{lab:'Ca 1 l',n:n,e:'🥛'}]})}return unitGen('l')()});
 def('wKg',()=>{const a=R(10,45),b=R(5,40);return pick([
-  ()=>F(`Bao gạo nặng ${a} kg, bao ngô nặng ${b} kg. Hỏi cả hai bao nặng bao nhiêu ki-lô-gam?`,a+b,{u:'kg',long:true}),
-  ()=>{const c=a+b;return F(`Con lợn cân nặng ${c} kg. Con chó nhẹ hơn con lợn ${b} kg. Hỏi con chó cân nặng bao nhiêu ki-lô-gam?`,a,{u:'kg',long:true})},
-  ()=>F(`Mẹ mua ${a} kg cam, sau đó mua thêm ${b} kg quýt. Hỏi mẹ đã mua tất cả bao nhiêu ki-lô-gam hoa quả?`,a+b,{u:'kg',long:true}),
+  ()=>F(`Bao gạo nặng ${a} kg, bao ngô nặng ${b} kg. Hỏi cả hai bao nặng bao nhiêu ki-lô-gam?`,a+b,{u:'kg',long:true,sc:[SI('🍚','Bao gạo',`${a} kg`),SI('🌽','Bao ngô',`${b} kg`),SI('⚖️','Cả hai bao','? kg')]}),
+  ()=>{const c=a+b;return F(`Con lợn cân nặng ${c} kg. Con chó nhẹ hơn con lợn ${b} kg. Hỏi con chó cân nặng bao nhiêu ki-lô-gam?`,a,{u:'kg',long:true,sc:[SI('🐷','Con lợn',`${c} kg`),SI('🐶','Con chó',`nhẹ hơn ${b} kg`),SI('⚖️','Con chó','? kg')]})},
+  ()=>F(`Mẹ mua ${a} kg cam, sau đó mua thêm ${b} kg quýt. Hỏi mẹ đã mua tất cả bao nhiêu ki-lô-gam hoa quả?`,a+b,{u:'kg',long:true,sc:[SI('🍊','Cam',`${a} kg`),SI('🍊','Quýt',`${b} kg`),SI('⚖️','Tất cả','? kg')]}),
 ])()});
 def('wLit',()=>{const a=R(5,40),b=R(2,30);return pick([
-  ()=>F(`Can to đựng ${a} l nước, can bé đựng ${b} l nước. Hỏi cả hai can đựng bao nhiêu lít nước?`,a+b,{u:'l',long:true}),
-  ()=>{const c=a+b;return F(`Thùng có ${c} l nước, đã dùng ${b} l. Hỏi trong thùng còn lại bao nhiêu lít nước?`,a,{u:'l',long:true})},
-  ()=>F(`Buổi sáng cửa hàng bán được ${a} l dầu, buổi chiều bán được ${b} l dầu. Hỏi cả ngày bán được bao nhiêu lít dầu?`,a+b,{u:'l',long:true}),
+  ()=>F(`Can to đựng ${a} l nước, can bé đựng ${b} l nước. Hỏi cả hai can đựng bao nhiêu lít nước?`,a+b,{u:'l',long:true,sc:[SI('🛢️','Can to',`${a} l`),SI('🛢️','Can bé',`${b} l`),SI('🥛','Cả hai can','? l')]}),
+  ()=>{const c=a+b;return F(`Thùng có ${c} l nước, đã dùng ${b} l. Hỏi trong thùng còn lại bao nhiêu lít nước?`,a,{u:'l',long:true,sc:[SI('🪣','Thùng có',`${c} l`),SI('💧','Đã dùng',`${b} l`),SI('❔','Còn lại','? l')]})},
+  ()=>F(`Buổi sáng cửa hàng bán được ${a} l dầu, buổi chiều bán được ${b} l dầu. Hỏi cả ngày bán được bao nhiêu lít dầu?`,a+b,{u:'l',long:true,sc:[SI('🌅','Buổi sáng',`${a} l`),SI('🌇','Buổi chiều',`${b} l`),SI('🛢️','Cả ngày','? l')]}),
 ])()});
 
 /* --- Cộng trừ có nhớ ≤100 --- */
@@ -856,7 +868,7 @@ def('wMul2',()=>{const b=R(2,10);return pick([
 ])()});
 def('wMul5',()=>{const b=R(2,10);return pick([
   ()=>F(`Mỗi bàn tay có 5 ngón tay. Hỏi ${b} bàn tay có bao nhiêu ngón tay?`,5*b,{u:'ngón',long:true,cnt:[{lab:'',n:b,e:'🖐️'}]}),
-  ()=>F(`Mỗi túi có 5 kg gạo. Hỏi ${b} túi như thế có bao nhiêu ki-lô-gam gạo?`,5*b,{u:'kg',long:true,cnt:[{lab:'',n:b,e:'🛍️'}]}),
+  ()=>F(`Mỗi túi có 5 kg gạo. Hỏi ${b} túi như thế có bao nhiêu ki-lô-gam gạo?`,5*b,{u:'kg',long:true,sc:[SI('🛍️','Mỗi túi','5 kg'),SI('🛍️','Số túi',`${b} túi`),SI('⚖️','Tất cả','? kg')],cnt:[{lab:'',n:b,e:'🛍️'}]}),
   ()=>F(`Mỗi bông hoa có 5 cánh. Hỏi ${b} bông hoa có bao nhiêu cánh?`,5*b,{u:'cánh',long:true,cnt:[{lab:'',n:b,e:'🌸'}]}),
 ])()});
 def('divConcept',()=>{const a=R(2,5),b=R(2,5),c=a*b;const e=pick(EM);return pick([
@@ -885,9 +897,9 @@ def('wDiv2',()=>{const b=R(2,10),c=2*b;return pick([
   ()=>F(`Có ${c} học sinh xếp đều thành 2 hàng. Hỏi mỗi hàng có bao nhiêu học sinh?`,b,{u:'học sinh',long:true,cnt:[{lab:'',n:c,e:'🧒'}]}),
 ])()});
 def('wDiv5',()=>{const b=R(2,10),c=5*b;return pick([
-  ()=>F(`Có ${c} bông hoa cắm đều vào 5 lọ. Hỏi mỗi lọ có mấy bông hoa?`,b,{u:'bông',long:true,cnt:[{lab:'',n:c,e:'🌸'}]}),
-  ()=>F(`Có ${c} kg gạo chia đều vào các túi, mỗi túi 5 kg. Hỏi được bao nhiêu túi gạo?`,b,{u:'túi',long:true}),
-  ()=>F(`Có ${c} quyển vở chia đều cho 5 bạn. Hỏi mỗi bạn được mấy quyển vở?`,b,{u:'quyển',long:true,cnt:[{lab:'',n:c,e:'📒'}]}),
+  ()=>F(`Có ${c} bông hoa cắm đều vào 5 lọ. Hỏi mỗi lọ có mấy bông hoa?`,b,{u:'bông',long:true,sc:[SI('🌸','Có',`${c} bông`),SI('🏺','Cắm vào','5 lọ'),SI('❔','Mỗi lọ','? bông')],cnt:[{lab:'',n:c,e:'🌸'}]}),
+  ()=>F(`Có ${c} kg gạo chia đều vào các túi, mỗi túi 5 kg. Hỏi được bao nhiêu túi gạo?`,b,{u:'túi',long:true,sc:[SI('🍚','Có',`${c} kg gạo`),SI('🛍️','Mỗi túi','5 kg'),SI('❔','Số túi','?')]}),
+  ()=>F(`Có ${c} quyển vở chia đều cho 5 bạn. Hỏi mỗi bạn được mấy quyển vở?`,b,{u:'quyển',long:true,sc:[SI('📒','Có',`${c} quyển`),SI('🧒','Chia cho','5 bạn'),SI('❔','Mỗi bạn','? quyển')],cnt:[{lab:'',n:c,e:'📒'}]}),
 ])()});
 
 /* --- Hình khối --- */
@@ -955,9 +967,9 @@ def('len',()=>pick([
 def('lenUnit',()=>{const p=pick([['Cái bút chì dài khoảng 15',"cm"],['Gang tay của em dài khoảng 1','dm'],['Cái bàn học dài khoảng 1','m'],['Quãng đường từ nhà em đến trường dài khoảng 2','km'],['Cục tẩy dài khoảng 3','cm'],['Cột cờ cao khoảng 10','m'],['Quyển sách Toán 2 dài khoảng 3','dm'],['Quãng đường Hà Nội – Hải Phòng dài khoảng 100','km'],['Chiếc giường dài khoảng 2','m'],['Con kiến dài khoảng 1','cm']]);
   return F(`${p[0]} {_}`,p[1],{opts:['cm','dm','m','km']})});
 def('wLen',()=>{const a=R(10,60),b=R(5,40);return pick([
-  ()=>F(`Đoạn dây thứ nhất dài ${a} dm, đoạn dây thứ hai dài ${b} dm. Hỏi cả hai đoạn dây dài bao nhiêu đề-xi-mét?`,a+b,{u:'dm',long:true}),
-  ()=>F(`Quãng đường từ nhà Nam đến chợ dài ${a} km, từ chợ đến bến xe dài ${b} km. Hỏi quãng đường từ nhà Nam qua chợ đến bến xe dài bao nhiêu ki-lô-mét?`,a+b,{u:'km',long:true}),
-  ()=>{const c=a+b;return F(`Cuộn vải dài ${c} m, đã cắt đi ${b} m. Hỏi cuộn vải còn lại bao nhiêu mét?`,a,{u:'m',long:true})},
+  ()=>F(`Đoạn dây thứ nhất dài ${a} dm, đoạn dây thứ hai dài ${b} dm. Hỏi cả hai đoạn dây dài bao nhiêu đề-xi-mét?`,a+b,{u:'dm',long:true,sc:[SI('🧵','Đoạn thứ nhất',`${a} dm`),SI('🧵','Đoạn thứ hai',`${b} dm`),SI('📏','Cả hai đoạn','? dm')]}),
+  ()=>F(`Quãng đường từ nhà Nam đến chợ dài ${a} km, từ chợ đến bến xe dài ${b} km. Hỏi quãng đường từ nhà Nam qua chợ đến bến xe dài bao nhiêu ki-lô-mét?`,a+b,{u:'km',long:true,sc:[SI('🏠','Nhà → Chợ',`${a} km`),SI('🏪','Chợ → Bến xe',`${b} km`),SI('🚏','Cả quãng đường','? km')]}),
+  ()=>{const c=a+b;return F(`Cuộn vải dài ${c} m, đã cắt đi ${b} m. Hỏi cuộn vải còn lại bao nhiêu mét?`,a,{u:'m',long:true,sc:[SI('🧶','Cuộn vải',`${c} m`),SI('✂️','Cắt đi',`${b} m`),SI('❔','Còn lại','? m')]})},
 ])()});
 const DEN=[100,200,500,1000];
 def('money',()=>pick([
@@ -968,8 +980,8 @@ def('money',()=>pick([
   ()=>F('{_} tờ 200 đồng bằng 1 000 đồng',5),
   ()=>F('1 000 đồng đổi được {_} tờ 100 đồng',10),
   ()=>{const a=pick([[200,'2 tờ 100 đồng','=',200],[500,'2 tờ 200 đồng','>',400],[1000,'3 tờ 200 đồng','>',600],[500,'3 tờ 200 đồng','<',600]]);return F(`${fmt(a[0])} đồng {_} ${a[1]}`,a[2],{opts:['>','<','=']})},
-  ()=>{const a=pick([200,500]),b=pick([100,200,500]);const [N]=two2();return F(`${N} có ${a} đồng, mẹ cho thêm ${b} đồng. Hỏi ${N} có tất cả bao nhiêu tiền?`,a+b,{u:'đồng',long:true})},
-  ()=>{const b=pick([200,300,500,700]);return F(`Mai có 1 000 đồng, Mai mua một cái bút chì hết ${b} đồng. Hỏi Mai còn lại bao nhiêu tiền?`,1000-b,{u:'đồng',long:true})},
+  ()=>{const a=pick([200,500]),b=pick([100,200,500]);const [N]=two2();return F(`${N} có ${a} đồng, mẹ cho thêm ${b} đồng. Hỏi ${N} có tất cả bao nhiêu tiền?`,a+b,{u:'đồng',long:true,sc:[SI('💵',N+' có',`${a} đồng`),SI('💵','Mẹ cho thêm',`${b} đồng`),SI('❔','Tất cả','? đồng')]})},
+  ()=>{const b=pick([200,300,500,700]);return F(`Mai có 1 000 đồng, Mai mua một cái bút chì hết ${b} đồng. Hỏi Mai còn lại bao nhiêu tiền?`,1000-b,{u:'đồng',long:true,sc:[SI('💵','Mai có','1 000 đồng'),SI('✏️','Bút chì',`${b} đồng`),SI('❔','Còn lại','? đồng')]})},
 ])());
 
 /* --- Cộng trừ trong phạm vi 1000 --- */
@@ -984,10 +996,10 @@ function arith3(p,op,tron){return()=>{if(tron&&Math.random()<.3){if(op==='+'){co
 def('add1000nc',arith3(p3nc,'+',true));def('add1000c',arith3(p3c,'+'));
 def('sub1000nc',arith3(s3nc,'-',true));def('sub1000c',arith3(s3c,'-'));
 def('w1000',()=>pick([
-  ()=>{const [a,b]=p3nc();return F(`Trường Tiểu học Hòa Bình có ${a} học sinh nam và ${b} học sinh nữ. Hỏi trường có tất cả bao nhiêu học sinh?`,a+b,{u:'học sinh',long:true})},
-  ()=>{const [a,b]=s3c();return F(`Một cửa hàng có ${a} kg gạo, đã bán ${b} kg gạo. Hỏi cửa hàng còn lại bao nhiêu ki-lô-gam gạo?`,a-b,{u:'kg',long:true})},
-  ()=>{const [a,b]=p3c();return F(`Đàn vịt có ${a} con, đàn gà có ${b} con. Hỏi cả hai đàn có bao nhiêu con?`,a+b,{u:'con',long:true})},
-  ()=>{const [a,b]=s3nc();return F(`Thư viện có ${a} quyển sách, đã cho mượn ${b} quyển. Hỏi thư viện còn lại bao nhiêu quyển sách?`,a-b,{u:'quyển',long:true})},
+  ()=>{const [a,b]=p3nc();return F(`Trường Tiểu học Hòa Bình có ${a} học sinh nam và ${b} học sinh nữ. Hỏi trường có tất cả bao nhiêu học sinh?`,a+b,{u:'học sinh',long:true,sc:[SI('👦','Học sinh nam',`${a}`),SI('👧','Học sinh nữ',`${b}`),SI('🏫','Cả trường','?')]})},
+  ()=>{const [a,b]=s3c();return F(`Một cửa hàng có ${a} kg gạo, đã bán ${b} kg gạo. Hỏi cửa hàng còn lại bao nhiêu ki-lô-gam gạo?`,a-b,{u:'kg',long:true,sc:[SI('🍚','Có',`${a} kg`),SI('🏪','Đã bán',`${b} kg`),SI('❔','Còn lại','? kg')]})},
+  ()=>{const [a,b]=p3c();return F(`Đàn vịt có ${a} con, đàn gà có ${b} con. Hỏi cả hai đàn có bao nhiêu con?`,a+b,{u:'con',long:true,sc:[SI('🦆','Đàn vịt',`${a} con`),SI('🐔','Đàn gà',`${b} con`),SI('❔','Cả hai đàn','? con')]})},
+  ()=>{const [a,b]=s3nc();return F(`Thư viện có ${a} quyển sách, đã cho mượn ${b} quyển. Hỏi thư viện còn lại bao nhiêu quyển sách?`,a-b,{u:'quyển',long:true,sc:[SI('📚','Thư viện có',`${a} quyển`),SI('🧒','Cho mượn',`${b} quyển`),SI('❔','Còn lại','? quyển')]})},
 ])());
 
 /* --- Thống kê, xác suất --- */
@@ -1298,14 +1310,14 @@ function opEmoji(text){if(/×/.test(text))return '✖️';if(/:\s*\d/.test(text)
 const CDPIC={1:'🔢',2:'🧮',3:'⚖️',4:'🧮',5:'📐',6:'📅',7:'📝',8:'✖️',9:'⚽',10:'💯',11:'📏',12:'🧮',13:'📊',14:'🏆'};
 const EMO2ICON={'🍓':'dau','🍎':'tao','🍉':'dua_hau','🍍':'dua','🍊':'cam','🍒':'anh_dao','🍇':'nho','🍌':'chuoi','🌽':'ngo','🎃':'bi_ngo','🥥':'dua_xiem',
  '🐦':'chim','🐟':'ca','🦋':'buom','🌸':'hoa','🌼':'hoa','🌳':'cay','🌱':'mam','🏡':'vuon','🥚':'trung','🌞':'troi','⛅':'troi','🌙':'dem','🌇':'troi','🌅':'troi',
- '🚌':'bus','🚗':'oto','⛵':'thuyen','🍰':'banh','🍬':'keo','🍪':'cookie','💵':'tien','🪙':'xu','🎁':'qua','🧮':'ban_tinh','⚽':'bong','🥁':'trong','✏️':'but_mau','🎲':'xuc_xac','🦆':'vit','🐶':'cho','🤖':'robot','🪣':'xo','🧸':'gau',
+ '🚌':'bus','🚗':'oto','⛵':'thuyen','🍰':'banh','🍬':'keo','🍪':'cookie','💵':'tien','🪙':'xu','🎁':'qua','🧮':'ban_tinh','⚽':'bong','🥁':'trong','✏️':'but_mau','🎲':'xuc_xac','🤖':'robot','🪣':'xo','🧸':'gau',
  '⚖️':'can','🥛':'ca_dong','📏':'thuoc','⏰':'dong_ho','⏱️':'bam_gio','📅':'lich','🏠':'nha','🏫':'truong','🏪':'cua_hang','🚏':'ben_xe','📚':'sach','📒':'sach',
  '🔺':'tam_giac','🟦':'tu_giac','⚪':'hinh_tron','📊':'bieu_do','✖️':'phep_tinh','➗':'phep_tinh','🔢':'chu_so','💯':'chu_so','🔟':'chu_so','📐':'eke','🧑‍🏫':'bang'};
 const ICONKW={'khối cầu':'khoi_cau','khối trụ':'khoi_tru','khối lập phương':'khoi_lp','com-pa':'compa','thước kẻ':'thuoc_ke','một ngày có':'gio24','thư viện':'thu_vien','quả cân':'qua_can','tiết kiệm':'heo_dat','cà rốt':'ca_rot'};
 function icoFor(e){if(e&&e.startsWith('i:'))return e.slice(2);const k=EMO2ICON[e]||EMO2ICON[(e||'').replace(/\uFE0F/g,'')+'\uFE0F']||EMO2ICON[(e||'').replace(/\uFE0F/g,'')];return k}
 function picHtml(es){if(!es.length)return null;const hasI=typeof ICON!=='undefined';
   return `<div class="ipic n${es.length}">${es.map((e,i)=>{const k=hasI?icoFor(e):null;return k&&ICON[k]?`<span class="im" style="animation-delay:${i*.25}s"><img src="${ICON[k]}" alt=""></span>`:`<span style="animation-delay:${i*.25}s">${e}</span>`}).join('')}</div>`}
-const COUNT_ICON={'🍊':'cam','🍎':'tao','🍬':'keo','⚽':'bong','🧁':'banh','🦆':'vit','🐶':'cho'};
+const COUNT_ICON={'🍊':'cam','🍎':'tao','🍬':'keo','⚽':'bong','🧁':'banh'};
 function oneItem(e,cls){const k=typeof ICON!=='undefined'?COUNT_ICON[e]:null;return `<i class="${cls}">${k&&ICON[k]?`<img src="${ICON[k]}" alt="">`:e}</i>`}
 function countPic(rows){
   if(!rows||!rows.length||rows.some(r=>r.n+(r.plus||0)>20))return null;
@@ -1313,7 +1325,9 @@ function countPic(rows){
     return `<div class="crow">${r.lab?`<b>${esc(r.lab)}</b>`:''}<span class="citems">${s}</span></div>`}).join('')+'</div>';
 }
 function picText(){return null}
-function picFor(f){if(f.html)return null;return f.cnt?countPic(f.cnt):null}
+function bigItem(e){const k=typeof ICON!=='undefined'&&typeof icoFor==='function'?icoFor(e):null;return k&&ICON[k]?`<img src="${ICON[k]}" alt="">`:e}
+function scenePic(items){return '<div class="scene">'+items.map(it=>`<div class="sc-it ${it.val.includes('?')?'q':''}"><span class="sc-ic">${it.e==='❔'?'?':bigItem(it.e)}</span><b>${esc(it.lab)}</b><span class="sc-v">${esc(it.val)}</span></div>`).join('')+'</div>'}
+function picFor(f){if(f.html)return null;return (f.cnt&&countPic(f.cnt))||(f.sc?scenePic(f.sc):null)}
 function sticker(){return null}
 
 /* ================= LƯU TRỮ & ÂM THANH ================= */
