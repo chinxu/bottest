@@ -463,6 +463,17 @@ span.av{font-size:60px;height:auto}
 @media (max-width:520px){.ipic span{width:78px;height:78px;font-size:46px}.ipic.n1 span{width:96px;height:96px;font-size:60px}}
 .ipic span.im{background:var(--s-yellow)}
 .ipic span.im img{width:68%;height:68%;object-fit:contain}
+/* hình để đếm, chỉ cho bài toán có đồ vật */
+.cpic{display:flex;flex-direction:column;gap:8px;width:100%;max-width:640px}
+.crow{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.crow b{min-width:96px;font-size:15px;color:var(--muted)}
+.citems{display:flex;flex-wrap:wrap;gap:4px;font-size:32px;line-height:1}
+.citems i{font-style:normal;position:relative;display:inline-grid;place-items:center;width:40px;height:40px}
+.citems i img{width:36px;height:36px;object-fit:contain}
+.citems i.gone{opacity:.35}
+.citems i.gone::after{content:"";position:absolute;inset:4px;background:linear-gradient(45deg,transparent 45%,var(--red) 45% 55%,transparent 55%)}
+.citems i.plus{background:var(--s-green);border-radius:10px;outline:2px dashed var(--green)}
+@media (max-width:520px){.citems{font-size:24px}.citems i{width:30px;height:30px}.citems i img{width:27px;height:27px}.crow b{min-width:0;flex-basis:100%}}
 </style>
 </head><body>
 <header class="top" id="top"></header><main class="wrap" id="main"></main>
@@ -512,6 +523,8 @@ function wordOpts(n,lo,hi){
 }
 const NAMES=['An','Bình','Mai','Lan','Hùng','Nam','Hoa','Minh','Việt','Hà','Mi','Rô-bốt'];
 const OBJ=[['quả cam','quả'],['bông hoa','bông'],['cái kẹo','cái'],['quyển vở','quyển'],['viên bi','viên'],['con gà','con'],['cái bút chì','cái'],['quả bóng','quả'],['chiếc thuyền giấy','chiếc'],['quả táo','quả'],['con cá','con'],['cái bánh','cái'],['ngôi sao giấy','ngôi sao'],['nhãn vở','nhãn vở']];
+const OBJE={'quả cam':'🍊','bông hoa':'🌸','cái kẹo':'🍬','quyển vở':'📒','viên bi':'🔵','con gà':'🐔','cái bút chì':'✏️','quả bóng':'⚽','chiếc thuyền giấy':'⛵','quả táo':'🍎','con cá':'🐟','cái bánh':'🧁','ngôi sao giấy':'⭐','nhãn vở':'🏷️'};
+const oe=o=>OBJE[o[0]]||'⭐';
 const two2=()=>{const a=shuffle(NAMES);return [a[0],a[1]]};
 const THU=['Chủ nhật','thứ Hai','thứ Ba','thứ Tư','thứ Năm','thứ Sáu','thứ Bảy'];
 
@@ -660,25 +673,25 @@ defQ('sub20split',['fill'],()=>{const [a,b]=pSub20(),u=a%10;
 def('missing20sub',()=>{const [a,b]=pSub20();return Math.random()<.5?F(`${a} ${MI} {_} = ${a-b}`,b):F(`{_} ${MI} ${b} = ${a-b}`,a)});
 def('cmpExpr20sub',cmpExprGen(()=>{const [a,b]=pSub20();return [`${a} ${MI} ${b}`,a-b]}));
 function wThemBot(max){return()=>{const [N,M]=two2();const o=pick(OBJ);const a=R(3,max-3),b=R(1,Math.min(9,max-a));const c=R(5,max),d=R(1,c-1);return pick([
-  ()=>F(`Trong vườn có ${a} ${o[0]}, ${N} mang thêm ${b} ${o[0]}. Hỏi có tất cả bao nhiêu ${o[0]}?`,a+b,{u:o[1],long:true}),
-  ()=>F(`${N} có ${a} ${o[0]}. ${M} cho ${N} thêm ${b} ${o[0]} nữa. Hỏi ${N} có tất cả bao nhiêu ${o[0]}?`,a+b,{u:o[1],long:true}),
-  ()=>F(`Trên cành có ${c} con chim, sau đó ${d} con bay đi. Hỏi trên cành còn lại bao nhiêu con chim?`,c-d,{u:'con',long:true}),
-  ()=>F(`Trên xe có ${c} bạn, đến điểm dừng có ${d} bạn xuống xe. Hỏi trên xe còn lại bao nhiêu bạn?`,c-d,{u:'bạn',long:true}),
-  ()=>F(`${N} có ${c} ${o[0]}, ${N} cho ${M} ${d} ${o[0]}. Hỏi ${N} còn lại bao nhiêu ${o[0]}?`,c-d,{u:o[1],long:true}),
+  ()=>F(`Trong vườn có ${a} ${o[0]}, ${N} mang thêm ${b} ${o[0]}. Hỏi có tất cả bao nhiêu ${o[0]}?`,a+b,{u:o[1],long:true,cnt:[{lab:'Có',n:a,e:oe(o)},{lab:'Thêm',n:b,e:oe(o)}]}),
+  ()=>F(`${N} có ${a} ${o[0]}. ${M} cho ${N} thêm ${b} ${o[0]} nữa. Hỏi ${N} có tất cả bao nhiêu ${o[0]}?`,a+b,{u:o[1],long:true,cnt:[{lab:N+' có',n:a,e:oe(o)},{lab:M+' cho thêm',n:b,e:oe(o)}]}),
+  ()=>F(`Trên cành có ${c} con chim, sau đó ${d} con bay đi. Hỏi trên cành còn lại bao nhiêu con chim?`,c-d,{u:'con',long:true,cnt:[{lab:'Trên cành',n:c,e:'🐦',x:d}]}),
+  ()=>F(`Trên xe có ${c} bạn, đến điểm dừng có ${d} bạn xuống xe. Hỏi trên xe còn lại bao nhiêu bạn?`,c-d,{u:'bạn',long:true,cnt:[{lab:'Trên xe',n:c,e:'🧒',x:d}]}),
+  ()=>F(`${N} có ${c} ${o[0]}, ${N} cho ${M} ${d} ${o[0]}. Hỏi ${N} còn lại bao nhiêu ${o[0]}?`,c-d,{u:o[1],long:true,cnt:[{lab:N+' có',n:c,e:oe(o),x:d}]}),
 ])()}}
 def('wThem',wThemBot(20));
-def('themBotF',()=>{const a=R(3,15),b=R(1,5);return pick([()=>F(`${a} thêm ${b} là {_}`,a+b),()=>F(`${a+b} bớt ${b} là {_}`,a),()=>F(`Có ${a} con gà, thêm ${b} con gà nữa thì có {_} con gà`,a+b),()=>F(`Có ${a+b} cái kẹo, ăn bớt ${b} cái thì còn {_} cái kẹo`,a)])()});
-def('nhieuItF',()=>{const a=R(5,15),b=R(1,5);return pick([()=>F(`Số nhiều hơn ${a} là ${b} đơn vị là số {_}`,a+b),()=>F(`Số ít hơn ${a} là ${b} đơn vị là số {_}`,a-b),()=>F(`Nhiều hơn ${a} quả cam ${b} quả là {_} quả cam`,a+b),()=>F(`Ít hơn ${a} bông hoa ${b} bông là {_} bông hoa`,a-b)])()});
+def('themBotF',()=>{const a=R(3,15),b=R(1,5);return pick([()=>F(`${a} thêm ${b} là {_}`,a+b),()=>F(`${a+b} bớt ${b} là {_}`,a),()=>F(`Có ${a} con gà, thêm ${b} con gà nữa thì có {_} con gà`,a+b,{cnt:[{lab:'Có',n:a,e:'🐔'},{lab:'Thêm',n:b,e:'🐔'}]}),()=>F(`Có ${a+b} cái kẹo, ăn bớt ${b} cái thì còn {_} cái kẹo`,a,{cnt:[{lab:'Có',n:a+b,e:'🍬',x:b}]})])()});
+def('nhieuItF',()=>{const a=R(5,15),b=R(1,5);return pick([()=>F(`Số nhiều hơn ${a} là ${b} đơn vị là số {_}`,a+b),()=>F(`Số ít hơn ${a} là ${b} đơn vị là số {_}`,a-b),()=>F(`Nhiều hơn ${a} quả cam ${b} quả là {_} quả cam`,a+b,{cnt:[{lab:'',n:a,e:'🍊',plus:b}]}),()=>F(`Ít hơn ${a} bông hoa ${b} bông là {_} bông hoa`,a-b,{cnt:[{lab:'',n:a,e:'🌸',x:b}]})])()});
 def('wThem20',()=>{const [a,b]=pAdd20();const [N]=two2();const o=pick(OBJ);return pick([
-  ()=>F(`${N} có ${a} ${o[0]}, mẹ cho ${N} thêm ${b} ${o[0]}. Hỏi ${N} có tất cả bao nhiêu ${o[0]}?`,a+b,{u:o[1],long:true}),
-  ()=>F(`Cabin thứ nhất có ${a} người, cabin thứ hai có ${b} người. Hỏi cả hai cabin có bao nhiêu người?`,a+b,{u:'người',long:true}),
+  ()=>F(`${N} có ${a} ${o[0]}, mẹ cho ${N} thêm ${b} ${o[0]}. Hỏi ${N} có tất cả bao nhiêu ${o[0]}?`,a+b,{u:o[1],long:true,cnt:[{lab:N+' có',n:a,e:oe(o)},{lab:'Mẹ cho thêm',n:b,e:oe(o)}]}),
+  ()=>F(`Cabin thứ nhất có ${a} người, cabin thứ hai có ${b} người. Hỏi cả hai cabin có bao nhiêu người?`,a+b,{u:'người',long:true,cnt:[{lab:'Cabin 1',n:a,e:'🧑'},{lab:'Cabin 2',n:b,e:'🧑'}]}),
 ])()});
-def('wSub20',()=>{const [a,b]=pSub20();const o=pick(OBJ);return F(`Có ${a} ${o[0]}, đã dùng hết ${b} ${o[0]}. Hỏi còn lại bao nhiêu ${o[0]}?`,a-b,{u:o[1],long:true})});
+def('wSub20',()=>{const [a,b]=pSub20();const o=pick(OBJ);return F(`Có ${a} ${o[0]}, đã dùng hết ${b} ${o[0]}. Hỏi còn lại bao nhiêu ${o[0]}?`,a-b,{u:o[1],long:true,cnt:[{lab:'Có',n:a,e:oe(o),x:b}]})});
 function wNhieuIt(pA,pS){return()=>{const [N,M]=two2();const o=pick(OBJ);return pick([
-  ()=>{const [a,b]=pA();return F(`${N} có ${a} ${o[0]}, ${M} có nhiều hơn ${N} ${b} ${o[0]}. Hỏi ${M} có bao nhiêu ${o[0]}?`,a+b,{u:o[1],long:true})},
-  ()=>{const [a,b]=pA();return F(`Lớp 2A có ${a} bạn nữ, số bạn nam nhiều hơn số bạn nữ là ${b} bạn. Hỏi lớp 2A có bao nhiêu bạn nam?`,a+b,{u:'bạn',long:true})},
-  ()=>{const [a,b]=pS();return F(`${N} có ${a} ${o[0]}, ${M} có ít hơn ${N} ${b} ${o[0]}. Hỏi ${M} có bao nhiêu ${o[0]}?`,a-b,{u:o[1],long:true})},
-  ()=>{const [a,b]=pS();return F(`Đàn gà có ${a} con, đàn vịt ít hơn đàn gà ${b} con. Hỏi đàn vịt có bao nhiêu con?`,a-b,{u:'con',long:true})},
+  ()=>{const [a,b]=pA();return F(`${N} có ${a} ${o[0]}, ${M} có nhiều hơn ${N} ${b} ${o[0]}. Hỏi ${M} có bao nhiêu ${o[0]}?`,a+b,{u:o[1],long:true,cnt:[{lab:N,n:a,e:oe(o)},{lab:M,n:a,e:oe(o),plus:b}]})},
+  ()=>{const [a,b]=pA();return F(`Lớp 2A có ${a} bạn nữ, số bạn nam nhiều hơn số bạn nữ là ${b} bạn. Hỏi lớp 2A có bao nhiêu bạn nam?`,a+b,{u:'bạn',long:true,cnt:[{lab:'Bạn nữ',n:a,e:'👧'},{lab:'Bạn nam',n:a,e:'👦',plus:b}]})},
+  ()=>{const [a,b]=pS();return F(`${N} có ${a} ${o[0]}, ${M} có ít hơn ${N} ${b} ${o[0]}. Hỏi ${M} có bao nhiêu ${o[0]}?`,a-b,{u:o[1],long:true,cnt:[{lab:N,n:a,e:oe(o)},{lab:M,n:a,e:oe(o),x:b}]})},
+  ()=>{const [a,b]=pS();return F(`Đàn gà có ${a} con, đàn vịt ít hơn đàn gà ${b} con. Hỏi đàn vịt có bao nhiêu con?`,a-b,{u:'con',long:true,cnt:[{lab:'Đàn gà',n:a,e:'🐔'},{lab:'Đàn vịt',n:a,e:'🦆',x:b}]})},
 ])()}}
 def('wNhieu20',wNhieuIt(pAdd20,pSub20));
 
@@ -829,14 +842,14 @@ function mulTable(k){return()=>{const b=R(1,10);return pick([
 ])()}}
 def('mul2',mulTable(2));def('mul5',mulTable(5));
 def('wMul2',()=>{const b=R(2,10);return pick([
-  ()=>F(`Mỗi con gà có 2 chân. Hỏi ${b} con gà có bao nhiêu chân?`,2*b,{u:'chân',long:true}),
-  ()=>F(`Mỗi đôi đũa có 2 chiếc. Hỏi ${b} đôi đũa có bao nhiêu chiếc đũa?`,2*b,{u:'chiếc',long:true}),
-  ()=>F(`Mỗi bạn được thưởng 2 quyển vở. Hỏi ${b} bạn được thưởng bao nhiêu quyển vở?`,2*b,{u:'quyển',long:true}),
+  ()=>F(`Mỗi con gà có 2 chân. Hỏi ${b} con gà có bao nhiêu chân?`,2*b,{u:'chân',long:true,cnt:[{lab:'',n:b,e:'🐔'}]}),
+  ()=>F(`Mỗi đôi đũa có 2 chiếc. Hỏi ${b} đôi đũa có bao nhiêu chiếc đũa?`,2*b,{u:'chiếc',long:true,cnt:[{lab:'',n:b,e:'🥢'}]}),
+  ()=>F(`Mỗi bạn được thưởng 2 quyển vở. Hỏi ${b} bạn được thưởng bao nhiêu quyển vở?`,2*b,{u:'quyển',long:true,cnt:[{lab:'',n:b,e:'🧒'}]}),
 ])()});
 def('wMul5',()=>{const b=R(2,10);return pick([
-  ()=>F(`Mỗi bàn tay có 5 ngón tay. Hỏi ${b} bàn tay có bao nhiêu ngón tay?`,5*b,{u:'ngón',long:true}),
-  ()=>F(`Mỗi túi có 5 kg gạo. Hỏi ${b} túi như thế có bao nhiêu ki-lô-gam gạo?`,5*b,{u:'kg',long:true}),
-  ()=>F(`Mỗi bông hoa có 5 cánh. Hỏi ${b} bông hoa có bao nhiêu cánh?`,5*b,{u:'cánh',long:true}),
+  ()=>F(`Mỗi bàn tay có 5 ngón tay. Hỏi ${b} bàn tay có bao nhiêu ngón tay?`,5*b,{u:'ngón',long:true,cnt:[{lab:'',n:b,e:'🖐️'}]}),
+  ()=>F(`Mỗi túi có 5 kg gạo. Hỏi ${b} túi như thế có bao nhiêu ki-lô-gam gạo?`,5*b,{u:'kg',long:true,cnt:[{lab:'',n:b,e:'🛍️'}]}),
+  ()=>F(`Mỗi bông hoa có 5 cánh. Hỏi ${b} bông hoa có bao nhiêu cánh?`,5*b,{u:'cánh',long:true,cnt:[{lab:'',n:b,e:'🌸'}]}),
 ])()});
 def('divConcept',()=>{const a=R(2,5),b=R(2,5),c=a*b;const e=pick(EM);return pick([
   ()=>F(`Có ${c} ${e} chia đều vào ${b} đĩa. Mỗi đĩa có {_} ${e}`,a),
@@ -859,14 +872,14 @@ function divTable(k){return()=>{const b=R(1,10),c=k*b;return pick([
 ])()}}
 def('div2',divTable(2));def('div5',divTable(5));
 def('wDiv2',()=>{const b=R(2,10),c=2*b;return pick([
-  ()=>F(`Có ${c} cái kẹo chia đều cho 2 bạn. Hỏi mỗi bạn được mấy cái kẹo?`,b,{u:'cái',long:true}),
-  ()=>F(`Có ${c} chiếc đũa, mỗi đôi có 2 chiếc. Hỏi có bao nhiêu đôi đũa?`,b,{u:'đôi',long:true}),
-  ()=>F(`Có ${c} học sinh xếp đều thành 2 hàng. Hỏi mỗi hàng có bao nhiêu học sinh?`,b,{u:'học sinh',long:true}),
+  ()=>F(`Có ${c} cái kẹo chia đều cho 2 bạn. Hỏi mỗi bạn được mấy cái kẹo?`,b,{u:'cái',long:true,cnt:[{lab:'',n:c,e:'🍬'}]}),
+  ()=>F(`Có ${c} chiếc đũa, mỗi đôi có 2 chiếc. Hỏi có bao nhiêu đôi đũa?`,b,{u:'đôi',long:true,cnt:[{lab:'',n:c,e:'🥢'}]}),
+  ()=>F(`Có ${c} học sinh xếp đều thành 2 hàng. Hỏi mỗi hàng có bao nhiêu học sinh?`,b,{u:'học sinh',long:true,cnt:[{lab:'',n:c,e:'🧒'}]}),
 ])()});
 def('wDiv5',()=>{const b=R(2,10),c=5*b;return pick([
-  ()=>F(`Có ${c} bông hoa cắm đều vào 5 lọ. Hỏi mỗi lọ có mấy bông hoa?`,b,{u:'bông',long:true}),
+  ()=>F(`Có ${c} bông hoa cắm đều vào 5 lọ. Hỏi mỗi lọ có mấy bông hoa?`,b,{u:'bông',long:true,cnt:[{lab:'',n:c,e:'🌸'}]}),
   ()=>F(`Có ${c} kg gạo chia đều vào các túi, mỗi túi 5 kg. Hỏi được bao nhiêu túi gạo?`,b,{u:'túi',long:true}),
-  ()=>F(`Có ${c} quyển vở chia đều cho 5 bạn. Hỏi mỗi bạn được mấy quyển vở?`,b,{u:'quyển',long:true}),
+  ()=>F(`Có ${c} quyển vở chia đều cho 5 bạn. Hỏi mỗi bạn được mấy quyển vở?`,b,{u:'quyển',long:true,cnt:[{lab:'',n:c,e:'📒'}]}),
 ])()});
 
 /* --- Hình khối --- */
@@ -1284,19 +1297,16 @@ const ICONKW={'khối cầu':'khoi_cau','khối trụ':'khoi_tru','khối lập 
 function icoFor(e){if(e&&e.startsWith('i:'))return e.slice(2);const k=EMO2ICON[e]||EMO2ICON[(e||'').replace(/\uFE0F/g,'')+'\uFE0F']||EMO2ICON[(e||'').replace(/\uFE0F/g,'')];return k}
 function picHtml(es){if(!es.length)return null;const hasI=typeof ICON!=='undefined';
   return `<div class="ipic n${es.length}">${es.map((e,i)=>{const k=hasI?icoFor(e):null;return k&&ICON[k]?`<span class="im" style="animation-delay:${i*.25}s"><img src="${ICON[k]}" alt=""></span>`:`<span style="animation-delay:${i*.25}s">${e}</span>`}).join('')}</div>`}
-function picText(text){return picHtml(kwEmojis(text))}
-function picFor(f){if(f.html)return null;return picText(f.q)}
-function qText(q){
-  const parts=[q.stem||''];
-  if(q.items)parts.push(...q.items.map(i=>i.text));
-  if(q.left)parts.push(...q.left);
-  if(q.opts&&!q.optHtml&&q.type!=='mc')parts.push(...q.opts);
-  if(q.parts)parts.push(...q.parts.filter(p=>typeof p==='string'));
-  if(q.rows)q.rows.forEach(r=>parts.push(...r.filter(p=>typeof p==='string')));
-  if(q.tokens)parts.push(...q.tokens);
-  return parts.join(' . ').replace(/<[^>]+>/g,' ');
+const COUNT_ICON={'🍊':'cam','🍎':'tao','🍬':'keo','⚽':'bong','🧁':'banh','🦆':'vit','🐶':'cho'};
+function oneItem(e,cls){const k=typeof ICON!=='undefined'?COUNT_ICON[e]:null;return `<i class="${cls}">${k&&ICON[k]?`<img src="${ICON[k]}" alt="">`:e}</i>`}
+function countPic(rows){
+  if(!rows||!rows.length||rows.some(r=>r.n+(r.plus||0)>20))return null;
+  return '<div class="cpic">'+rows.map(r=>{let s='';for(let i=0;i<r.n;i++)s+=oneItem(r.e,r.x&&i>=r.n-r.x?'gone':'');for(let i=0;i<(r.plus||0);i++)s+=oneItem(r.e,'plus');
+    return `<div class="crow">${r.lab?`<b>${esc(r.lab)}</b>`:''}<span class="citems">${s}</span></div>`}).join('')+'</div>';
 }
-function sticker(lid,q){if(!q)return null;return picHtml(kwEmojis(qText(q),q.type==='mc'||q.type==='fill'?3:2))}
+function picText(){return null}
+function picFor(f){if(f.html)return null;return f.cnt?countPic(f.cnt):null}
+function sticker(){return null}
 
 /* ================= LƯU TRỮ & ÂM THANH ================= */
 const store={get(k,d){try{const v=localStorage.getItem('toan2_'+k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem('toan2_'+k,JSON.stringify(v))}catch(e){}}};
